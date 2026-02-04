@@ -1,0 +1,21 @@
+{
+    "nav": {
+        "home": "Home",
+        "about": "About",
+        "skills": "Skills",
+        "projects": "Projects",
+        "services": "Services",
+        "contact": "Contact"
+    },
+    "hero": {
+        "status": "Available for hire",
+        "title": "Building Digital Experiences",
+        "subtitle": "I am a passionate Frontend Developer specializing in Vue.js, crafting beautiful and functional web applications.",
+        "cta": "View Projects",
+        "contact": "Contact Me"
+    },
+    "common": {
+        "view_projects": "View Projects",
+        "read_more": "Read More"
+    }
+}
