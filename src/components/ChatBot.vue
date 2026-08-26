@@ -37,57 +37,150 @@ const scrollToBottom = () => {
   }
 }
 
+const isThinking = ref(false)
+
 const keywords = {
-  greeting: ['هلا', 'مرحبا', 'السلام عليكم', 'سلام', 'hi', 'hello', 'hey'],
-  projects: ['مشاريع', 'اعمالك', 'أعمالك', 'مشروع', 'projects', 'work'],
-  contact: ['تواصل', 'رقم', 'ايميل', 'بريد', 'contact', 'email'],
-  price: ['سعر', 'بكم', 'تكلفة', 'فلوس', 'price', 'cost'],
-  tech: ['تقنيات', 'لغات', 'vue', 'react', 'tech', 'stack'],
-  who: ['من انت', 'مين انت', 'who are you', 'bot']
+  greeting: ['هلا', 'مرحبا', 'السلام عليكم', 'سلام', 'hi', 'hello', 'hey', 'أهلاً', 'صباح الخير', 'مساء الخير', 'كيفك', 'شخبارك', 'كيف الحال', 'مرحبتين'],
+  projects: ['مشاريع', 'اعمالك', 'أعمالك', 'مشروع', 'projects', 'work', 'سابقة اعمال', 'نماذج', 'معرض', 'بورتفوليو', 'portfolio', 'إنجازاتك', 'بنيت', 'صممت'],
+  services: ['خدماتك', 'الخدمات', 'خدمة', 'بتسوي', 'تعمل', 'مجالك', 'services', 'what do you do', 'تصميم', 'برمجة', 'تطوير', 'تطبيق', 'موقع'],
+  contact: ['تواصل', 'رقم', 'ايميل', 'بريد', 'contact', 'email', 'واتساب', 'واتس', 'whatsapp', 'موبايل', 'تلفون', 'هاتفك', 'حساباتك'],
+  price: ['سعر', 'بكم', 'تكلفة', 'فلوس', 'price', 'cost', 'الميزانية', 'تكاليف', 'أسعار', 'كم يكلف', 'دفع', 'budget'],
+  tech: ['تقنيات', 'لغات', 'vue', 'react', 'tech', 'stack', 'تكنولوجيا', 'نود', 'node', 'nuxt', 'vuejs', 'مكتبات', 'أدواتك'],
+  experience: ['خبرة', 'سنين', 'متى بدأت', 'مستواك', 'خبرتك', 'experience', 'سنوات'],
+  who: ['من انت', 'مين انت', 'who are you', 'bot', 'اسمك', 'عرفني', 'عنك', 'من زياد', 'مين زياد', 'نبذة', 'عن زياد'],
+  thanks: ['شكرا', 'يسلمو', 'يعطيك العافية', 'مشكور', 'عفوا', 'ما قصرت', 'thank you', 'thanks'],
+  hire: ['توظيف', 'نوظفك', 'شغل', 'فريلانسر', 'دوام', 'وظيفة', 'عمل', 'متاح', 'hire', 'freelance'],
+  location: ['من وين', 'مكانك', 'وينك', 'بلدك', 'يمن', 'اليمن', 'مقيم', 'location', 'where are you'],
+  resume: ['سيرة', 'سيرتك', 'ذاتية', 'cv', 'resume', 'مؤهلاتك', 'شهاداتك'],
+  time: ['كم ياخذ', 'وقت', 'مده', 'مدة', 'زمن', 'متى تخلص', 'time', 'duration', 'اسبوع', 'شهر'],
+  social: ['جيت هب', 'جتهب', 'github', 'لينكد', 'linkedin', 'منصات', 'سوشال'],
+  languages: ['عربي', 'لغة', 'انجليزي', 'english', 'arabic', 'لغات وتحدث'],
+  maintenance: ['صيانة', 'دعم', 'تعديل', 'تعديلات', 'support', 'maintenance', 'اصلاح'],
+  availability: ['متواجد', 'موجود', 'الان', 'متصل', 'اونلاين', 'فاضي', 'مشغول'],
+  hosting: ['استضافة', 'هوستنج', 'سيرفر', 'هوست', 'رفع', 'نشر', 'hosting', 'server', 'deploy', 'دومين'],
+  payment: ['دفع', 'فيزا', 'تحويل', 'باي بال', 'paypal', 'payment', 'طريقة الدفع', 'أقساط'],
+  meetings: ['اجتماع', 'مكالمة', 'زوم', 'zoom', 'meeting', 'ميتنج', 'مناقشة', 'نتصل', 'ميت'],
+  design: ['تصميم', 'figma', 'مصمم', 'ui', 'ux', 'ديزاين', 'واجهات', 'فوتوشوب'],
+  seo: ['سيو', 'بحث', 'جوجل', 'seo', 'تصدر', 'ارشفة', 'تسويق', 'محركات'],
+  discounts: ['خصم', 'تخفيض', 'عرض', 'عروض', 'خصومات', 'بلاش', 'مجاني'],
+  issues: ['عطل', 'خطأ', 'مايشتغل', 'يعلق', 'خربان', 'ايرور', 'error', 'bug']
 }
 
 const getBotResponse = (input) => {
   const text = input.toLowerCase()
   
   if (keywords.greeting.some(k => text.includes(k))) {
-    return 'وعليكم السلام! 👋 يا هلا فيك. تفضل، أنا هنا للإجابة على استفساراتك حول الموقع أو خدماتي.'
+    return 'وعليكم السلام ورحمة الله! 👋 يا أهلاً وسهلاً بك في موقعي. كيف يمكنني مساعدتك أو توجيهك اليوم؟'
   }
   
+  if (keywords.who.some(k => text.includes(k))) {
+    return 'أنا المساعد الذكي الخاص بزياد العريقي 🤖! زياد هو مطور واجهات ويب وتطبيقات متكاملة (Full-Stack)، مُتخصص في تحويل الأفكار إلى واقع رقمي مبهر. ✨'
+  }
+
   if (keywords.projects.some(k => text.includes(k))) {
-    return 'بالتأكيد! يمكنك تصفح قسم "المشاريع" من القائمة العلوية لرؤية أحدث أعمالي. هل تبحث عن نوع محدد؟ (تطبيقات، مواقع، متاجر)'
+    return 'لقد عملت على العديد من المشاريع الرائعة! يمكنك تصفح قسم "المشاريع" لرؤية الإبداع في التصميم والبرمجة. هل تبحث عن نوع محدد ببالك؟'
+  }
+
+  if (keywords.services.some(k => text.includes(k))) {
+    return 'نقدم خدمات رقمية متكاملة! من برمجة وتطوير المواقع، إلى المتاجر الإلكترونية وتطبيقات الويب المخصصة. كل ذلك بأحدث التقنيات وأفضل معايير الجودة. 💡'
   }
   
   if (keywords.contact.some(k => text.includes(k))) {
-    return 'يمكنك التواصل معي مباشرة عبر صفحة "تواصل معي" أو عبر البريد الإلكتروني: contact@portfolio.com'
+    return 'أسعد جداً بتواصلك! يمكنك إرسال رسالة لي مباشرة عبر صفحة "تواصل معي" وسأرد عليك سريعاً، أو تواصل معي فوراً عبر أيقونة الواتساب أسفل الشاشة. 📞'
   }
   
   if (keywords.price.some(k => text.includes(k))) {
-    return 'تعتمد التكلفة على تفاصيل ومميزات المشروع. أنصحك بملء نموذج التواصل وسأقوم بتقديم عرض سعر دقيق خلال 24 ساعة. 💼'
+    return 'تختلف التكلفة بناءً على حجم المشروع والمميزات المطلوبة. أرسل لي تفاصيل فكرتك عبر نموذج التواصل، وسأقوم بالرد بعرض سعر دقيق وبأفضل قيمة ممكنة. 💎'
   }
   
   if (keywords.tech.some(k => text.includes(k))) {
-    return 'أنا متخصص في بناء الواجهات باستخدام Vue.js & Tailwind CSS، بالإضافة إلى خبرة في الـ Backend باستخدام Node.js. 💻'
+    return 'أستخدم أحدث التقنيات العالمية: في الواجهات (Vue.js, Nuxt.js, TailwindCSS) وفي الخلفية (.Laravel / Node.js) وغيرها لضمان أداء خرافي لمشروعك! 💻'
   }
 
-  if (keywords.who.some(k => text.includes(k))) {
-    return 'أنا مساعد آلي ذكي 🤖، تم برمجتي لمساعدتك أثناء تصفحك لهذا الموقع الجميل!'
+  if (keywords.experience.some(k => text.includes(k))) {
+    return 'أمتلك خبرة عملية احترافية في بناء تطبيقات ومواقع ويب حديثة، وأنجزت العديد من المشاريع الناجحة بفضل الله. 🏆'
   }
 
-  return 'عذراً، لم أفهم تماماً. هل يمكنك صياغة السؤال بطريقة أخرى؟ أو يمكنك اختيار أحد المواضيع: المشاريع، التكلفة، التواصل.'
+  if (keywords.hire.some(k => text.includes(k))) {
+    return 'أنا متاح حالياً للعمل الحر (Freelance) واستقبال المشاريع الجديدة! تواصل معي عبر الواتس لنتحدث عن تفاصيل مشروعك القادم وتأكد أنك ستحصل على نتيجة تبهرك. 🤝'
+  }
+
+  if (keywords.location.some(k => text.includes(k))) {
+    return 'أنا متواجد في اليمن، صنعاء 🇾🇪. وأعمل مع عملاء من مختلف أنحاء العالم عن بُعد بكل سلاسة واحترافية.'
+  }
+
+  if (keywords.resume.some(k => text.includes(k))) {
+    return 'بالتأكيد! يمكنك الاطلاع على سيرتي الذاتية في قسم "عنّي" للتعرف أكثر على مؤهلاتي الأكاديمية والعملية واهتماماتي. 📄'
+  }
+
+  if (keywords.time.some(k => text.includes(k))) {
+    return 'تعتمد مدة إنجاز العمل على حجم المشروع. المشاريع البسيطة تأخذ أياماً، والكبيرة قد تحتاج لأسابيع. تواصل معي لتحديد مدة زمنية دقيقة لمشروعك! ⏱️'
+  }
+
+  if (keywords.social.some(k => text.includes(k))) {
+    return 'يسعدني تواصلك! روابط حساباتي في LinkedIn ومستودعاتي في GitHub موجودة في أسفل الموقع. لا تتردد في متابعتي. 🔗'
+  }
+
+  if (keywords.languages.some(k => text.includes(k))) {
+    return 'أتحدث اللغتين العربية والإنجليزية بطلاقة! ويمكنني تلبية احتياجات مشروعك واستهداف جمهورك بأي منهما. 🌍'
+  }
+
+  if (keywords.maintenance.some(k => text.includes(k))) {
+    return 'نعم بكل تأكيد! أقدم خدمات صيانة ودعم فني مستمر بعد تسليم أي مشروع لضمان استقرار أعمالك بأعلى كفاءة ممكنة. 🛠️'
+  }
+
+  if (keywords.availability.some(k => text.includes(k))) {
+    return 'أنا أحرص على التواجد والرد السريع على عملائي. اترك لي رسالة عبر الواتساب وسأرد عليك بأقرب فرصة ممكنة إن شاء الله! 🕒'
+  }
+
+  if (keywords.hosting.some(k => text.includes(k))) {
+    return 'نعم! يمكنني التكفل برفع المشروع على أفضل السيرفرات السحابية (Hosting) ومساعدتك في حجز النطاق (Domain) ليصبح موقعك جاهزاً للإطلاق للجمهور. 🚀'
+  }
+
+  if (keywords.payment.some(k => text.includes(k))) {
+    return 'أوفر وسائل دفع مرنة تناسب العميل، سواء بالتحويل البنكي أو الحوالات المباشرة. عادة ما يتم الدفع على دفعات (مقدم، عند التسليم). دعنا نتواصل للاتفاق! 💳'
+  }
+
+  if (keywords.meetings.some(k => text.includes(k))) {
+    return 'طبعاً يسعدني ذلك! يمكننا ترتيب اجتماع صوتي/مرئي عبر Zoom أو Google Meet لمناقشة كل تفاصيل ومتطلبات مشروعك بكل وضوح. 🗓️'
+  }
+
+  if (keywords.design.some(k => text.includes(k))) {
+    return 'أنا أقوم بالبرمجة وتحويل التصاميم (Figma/Adobe XD) إلى كود واقعي وتفاعلي (Front-end)، ويمكنني اقتراح وتحسين تصاميم واجهة المستخدم (UI/UX) لمشروعك! 🎨'
+  }
+
+  if (keywords.seo.some(k => text.includes(k))) {
+    return 'بالتأكيد! يتم بناء المواقع بأفضل الممارسات لتهيئتها لمحركات البحث (SEO)، مما يضمن أرشفة ظهور موقعك بشكل ممتاز على جوجل. 🔍'
+  }
+
+  if (keywords.discounts.some(k => text.includes(k))) {
+    return 'أسعاري دائماً مدروسة لتقديم أعلى قيمة مقابل التكلفة. تواصل معي لمناقشة الميزانية وهنالك دائماً مرونة ترضي الطرفين! 💯'
+  }
+
+  if (keywords.issues.some(k => text.includes(k))) {
+    return 'نعتذر إن واجهتك أي مشكلة. يرجى التقاط صورة للخطأ والتواصل معي فوراً عبر زر الواتساب وسأقوم بفحصه وإصلاحه بأسرع وقت! 🔧'
+  }
+
+  if (keywords.thanks.some(k => text.includes(k))) {
+    return 'العفو يا غالي وفِي خدمتك دائماً! لا تتردد أبداً في طرح أي استفسار آخر في أي وقت. 😊'
+  }
+
+  return 'عذراً، لم أستطع تحديد طلبك بدقة 🤔. هل يمكنك توضيح سؤالك أكثر؟ يمكنك سؤالي عن: خدماتي، مشاريعي، تكلفة التطوير، الدعم الفني، أو كيف نتواصل!'
 }
 
 const sendMessage = () => {
-  if (!messageInput.value.trim()) return
+  if (!messageInput.value.trim() || isThinking.value) return
 
   // Add User Message
+  const userText = messageInput.value
   messages.value.push({
     id: Date.now(),
-    text: messageInput.value,
+    text: userText,
     isBot: false
   })
 
-  const userText = messageInput.value
   messageInput.value = ''
+  isThinking.value = true
   nextTick(scrollToBottom)
 
   // Simulate thinking delay
@@ -97,8 +190,9 @@ const sendMessage = () => {
       text: getBotResponse(userText),
       isBot: true
     })
+    isThinking.value = false
     nextTick(scrollToBottom)
-  }, 600)
+  }, 1000)
 }
 </script>
 
@@ -157,6 +251,20 @@ const sendMessage = () => {
               {{ msg.text }}
             </div>
           </div>
+          
+          <!-- Typing Indicator -->
+          <div v-if="isThinking" class="flex items-start gap-3 flex-row">
+            <div class="w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 shadow-lg border border-black/5 bg-white dark:bg-slate-800">
+              <SparklesIcon class="w-6 h-6 text-primary-600 animate-pulse" />
+            </div>
+            <div class="p-4 rounded-3xl text-sm font-bold bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-tr-none border border-slate-100 dark:border-slate-700">
+               <span class="flex gap-1" dir="ltr">
+                  <span class="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 0ms"></span>
+                  <span class="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 150ms"></span>
+                  <span class="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style="animation-delay: 300ms"></span>
+               </span>
+            </div>
+          </div>
         </div>
 
         <!-- Input Area -->
@@ -176,8 +284,8 @@ const sendMessage = () => {
             </div>
             <button 
               type="submit" 
-              class="w-12 h-12 bg-primary-600 text-white rounded-2xl flex items-center justify-center hover:bg-primary-700 active:scale-95 transition-all shadow-xl shadow-primary-500/30"
-              :disabled="!messageInput.trim()"
+              class="w-12 h-12 bg-primary-600 text-white rounded-2xl flex items-center justify-center hover:bg-primary-700 active:scale-95 transition-all shadow-xl shadow-primary-500/30 disabled:opacity-50 disabled:cursor-not-allowed"
+              :disabled="!messageInput.trim() || isThinking"
             >
               <PaperAirplaneIcon class="w-6 h-6 -rotate-90 group-hover:translate-x-1 transition-transform" />
             </button>

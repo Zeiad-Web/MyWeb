@@ -174,10 +174,11 @@ const closePost = () => {
 </script>
 
 <template>
-  <div class="relative min-h-screen pt-32 pb-24 px-6 overflow-hidden">
+  <div class="relative min-h-screen pt-32 pb-24 px-6 overflow-hidden bg-slate-50 dark:bg-[#020617] transition-colors duration-500">
     <!-- Luxury Background Decorations -->
-    <div class="absolute top-0 right-0 w-[1000px] h-[1000px] bg-primary-500/5 blur-[160px] rounded-full -z-10 animate-pulse-slow"></div>
-    <div class="absolute bottom-0 left-0 w-[800px] h-[800px] bg-indigo-500/5 blur-[140px] rounded-full -z-10 animate-pulse-slow-reverse"></div>
+    <div class="absolute -top-40 -right-40 w-[800px] h-[800px] bg-primary-400/30 dark:bg-primary-600/20 blur-[120px] rounded-full mix-blend-multiply dark:mix-blend-screen animate-pulse-slow pointer-events-none"></div>
+    <div class="absolute top-[20%] -left-40 w-[600px] h-[600px] bg-cyan-400/30 dark:bg-cyan-600/20 blur-[100px] rounded-full mix-blend-multiply dark:mix-blend-screen animate-pulse-slow-reverse pointer-events-none"></div>
+    <div class="absolute bottom-0 right-[20%] w-[800px] h-[800px] bg-indigo-400/30 dark:bg-indigo-600/20 blur-[150px] rounded-full mix-blend-multiply dark:mix-blend-screen pointer-events-none"></div>
     
     <!-- SVG Pattern Background Overlay -->
     <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none -z-10 overflow-hidden">
@@ -205,42 +206,41 @@ const closePost = () => {
 
       <!-- Elite Magazine Grid Layout -->
       <div class="space-y-12" dir="rtl">
-        <!-- Featured Post - Takes Full Width -->
+        <!-- Featured Post - Immersive Cinematic Layout -->
         <article 
           v-for="post in posts.filter(p => p.featured)" 
           :key="post.id"
           @click="openPost(post)"
-          class="group cursor-pointer relative grid lg:grid-cols-2 bg-white dark:bg-slate-900/80 rounded-[4rem] overflow-hidden border border-slate-100 dark:border-white/5 hover:shadow-[0_40px_100px_-20px_rgba(37,99,235,0.15)] transition-all duration-700 reveal shadow-2xl"
+          class="group cursor-pointer relative rounded-[3rem] overflow-hidden hover:shadow-[0_40px_100px_-20px_rgba(37,99,235,0.5)] transition-all duration-700 reveal hover:scale-[1.01] aspect-auto md:aspect-[21/9] min-h-[600px] border border-white/20 dark:border-white/10"
         >
-          <div class="aspect-[16/10] lg:aspect-auto relative overflow-hidden">
-            <img :src="post.image" :alt="post.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent lg:bg-gradient-to-l opacity-60"></div>
-          </div>
-          <div class="p-10 md:p-20 flex flex-col justify-center space-y-8 relative">
-             <div class="inline-flex items-center gap-4">
-                <span class="bg-primary-600 text-white px-6 py-2 rounded-full text-xs font-black tracking-widest shadow-xl shadow-primary-600/30">مقال مميز</span>
-                <span class="text-slate-400 font-black text-xs uppercase tracking-widest">{{ post.category }}</span>
+          <img :src="post.image" :alt="post.title" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 group-hover:-rotate-1 transition-transform duration-1000">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-700"></div>
+          
+          <!-- Abstract Glows Inside Card -->
+          <div class="absolute bottom-0 right-0 w-96 h-96 bg-primary-600/40 blur-[100px] translate-x-1/2 translate-y-1/2 pointer-events-none"></div>
+          <div class="absolute top-0 left-0 w-96 h-96 bg-cyan-600/30 blur-[100px] -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+
+          <div class="absolute inset-0 p-8 md:p-16 flex flex-col justify-end z-10 w-full md:w-[80%] lg:w-[65%]">
+             <div class="inline-flex items-center gap-4 mb-6">
+                <span class="bg-gradient-to-r from-primary-600 to-cyan-500 text-white px-6 py-2 rounded-full text-xs font-black tracking-widest shadow-xl shadow-primary-600/30 border border-white/20">مقال مميز</span>
+                <span class="text-white font-black text-xs uppercase tracking-widest bg-white/20 dark:bg-slate-800/50 px-4 py-2 rounded-full backdrop-blur-md border border-white/10">{{ post.category }}</span>
              </div>
-             <h2 class="text-4xl md:text-6xl font-black leading-tight group-hover:text-primary-600 transition-colors">
+             <h2 class="text-4xl md:text-6xl font-black leading-tight text-white mb-6 group-hover:text-primary-400 transition-colors drop-shadow-2xl">
                {{ post.title }}
              </h2>
-             <p class="text-xl text-slate-500 dark:text-slate-400 leading-relaxed font-bold">
+             <p class="text-xl text-slate-200 leading-relaxed font-bold mb-8 line-clamp-2 pr-6 border-r-4 border-primary-500 drop-shadow-lg">
                {{ post.excerpt }}
              </p>
-             <div class="flex items-center gap-8 text-sm font-black text-slate-400">
-                <div class="flex items-center gap-2">
-                   <ClockIcon class="w-5 h-5 text-primary-500" />
+             <div class="flex flex-wrap items-center gap-6 text-sm font-black text-white/90">
+                <div class="flex items-center gap-2 bg-white/10 dark:bg-slate-900/40 border border-white/10 px-5 py-3 rounded-2xl backdrop-blur-md shadow-lg group-hover:bg-primary-600/20 transition-colors">
+                   <ClockIcon class="w-5 h-5 text-primary-400" />
                    <span>{{ post.readTime }} قراءة</span>
                 </div>
-                <div class="flex items-center gap-2">
-                   <CalendarIcon class="w-5 h-5 text-indigo-500" />
+                <div class="flex items-center gap-2 bg-white/10 dark:bg-slate-900/40 border border-white/10 px-5 py-3 rounded-2xl backdrop-blur-md shadow-lg group-hover:bg-cyan-600/20 transition-colors">
+                   <CalendarIcon class="w-5 h-5 text-cyan-400" />
                    <span>{{ post.date }}</span>
                 </div>
              </div>
-             <button class="w-fit inline-flex items-center gap-4 text-primary-600 font-black text-lg group/btn pt-4">
-                <span>اكتشف المزيد</span>
-                <ChevronRightIcon class="w-6 h-6 rotate-180 group-hover/btn:translate-x-[-8px] transition-transform" />
-             </button>
           </div>
         </article>
 
@@ -250,32 +250,35 @@ const closePost = () => {
             v-for="post in posts.filter(p => !p.featured)" 
             :key="post.id"
             @click="openPost(post)"
-            class="group cursor-pointer bg-white dark:bg-slate-950/40 rounded-[3rem] p-4 border border-slate-100 dark:border-white/5 hover:-translate-y-3 transition-all duration-500 hover:shadow-2xl reveal shadow-xl"
+            class="group cursor-pointer glass-card rounded-[3rem] p-4 border border-white/50 dark:border-white/10 hover:-translate-y-4 hover:scale-[1.02] transition-all duration-700 hover:shadow-[0_40px_80px_-20px_rgba(37,99,235,0.25)] reveal shadow-2xl relative overflow-hidden"
           >
-            <div class="aspect-video relative rounded-[2.5rem] overflow-hidden mb-8 shadow-lg">
-              <img :src="post.image" :alt="post.title" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <!-- Hover Glow -->
+            <div class="absolute inset-0 bg-gradient-to-br from-primary-500/0 via-transparent to-cyan-500/0 group-hover:from-primary-500/10 group-hover:to-cyan-500/10 transition-all duration-700 z-0 pointer-events-none"></div>
+
+            <div class="aspect-video relative rounded-[2.5rem] overflow-hidden mb-8 shadow-lg z-10 border border-white/20">
+              <img :src="post.image" :alt="post.title" class="w-full h-full object-cover group-hover:scale-110 group-hover:rotate-1 transition-all duration-1000">
               <div class="absolute top-6 left-6 flex gap-2">
-                 <button class="bg-white/90 dark:bg-slate-900/90 p-3 rounded-xl backdrop-blur-xl shadow-xl hover:text-primary-600 transition-colors">
+                 <button class="bg-white/70 dark:bg-slate-900/70 p-3 rounded-xl backdrop-blur-xl shadow-xl hover:text-primary-600 transition-colors border border-white/40 dark:border-white/10 hover:scale-110">
                     <BookmarkIcon class="w-5 h-5" />
                  </button>
-                 <button class="bg-white/90 dark:bg-slate-900/90 p-3 rounded-xl backdrop-blur-xl shadow-xl hover:text-primary-600 transition-colors">
+                 <button class="bg-white/70 dark:bg-slate-900/70 p-3 rounded-xl backdrop-blur-xl shadow-xl hover:text-primary-600 transition-colors border border-white/40 dark:border-white/10 hover:scale-110">
                     <ShareIcon class="w-5 h-5" />
                  </button>
               </div>
             </div>
             
-            <div class="px-6 pb-6 space-y-6">
-              <div class="flex justify-between items-center text-xs font-black text-slate-400 tracking-widest">
-                 <span class="text-indigo-500 uppercase">{{ post.category }}</span>
-                 <span>{{ post.date }}</span>
+            <div class="px-6 pb-6 space-y-6 relative z-10">
+              <div class="flex justify-between items-center text-xs font-black tracking-widest">
+                 <span class="bg-gradient-to-r from-primary-600 to-indigo-500 text-transparent bg-clip-text uppercase bg-white/50 dark:bg-slate-800/50 px-3 py-1.5 rounded-lg border border-white/30 dark:border-slate-700/50 shadow-sm">{{ post.category }}</span>
+                 <span class="text-slate-400 font-bold bg-slate-100/50 dark:bg-slate-800/50 px-3 py-1.5 rounded-lg">{{ post.date }}</span>
               </div>
-              <h3 class="text-3xl font-black leading-tight group-hover:text-primary-600 transition-colors">
+              <h3 class="text-3xl font-black leading-tight text-slate-800 dark:text-white group-hover:text-primary-600 transition-colors">
                 {{ post.title }}
               </h3>
-              <p class="text-slate-500 dark:text-slate-400 leading-relaxed font-bold line-clamp-2">
+              <p class="text-slate-600 dark:text-slate-400 leading-relaxed font-bold line-clamp-2">
                 {{ post.excerpt }}
               </p>
-              <div class="flex items-center gap-3 text-primary-600 font-black">
+              <div class="flex items-center gap-3 text-primary-600 font-black bg-primary-50 dark:bg-primary-900/20 w-fit px-4 py-2 rounded-xl group-hover:bg-primary-600 group-hover:text-white transition-colors duration-500">
                 <ClockIcon class="w-5 h-5" />
                 <span>{{ post.readTime }} قراءة</span>
               </div>
@@ -343,21 +346,24 @@ const closePost = () => {
       <div v-if="selectedPost" class="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8" dir="rtl">
         <div class="absolute inset-0 bg-slate-950/90 backdrop-blur-xl" @click="closePost"></div>
         
-        <div class="relative w-full max-w-5xl max-h-[92vh] glass bg-white dark:bg-slate-950 rounded-[4rem] overflow-hidden flex flex-col shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] border-white/10">
+        <div class="relative w-full max-w-5xl max-h-[95vh] glass-card rounded-[4rem] overflow-hidden flex flex-col shadow-[0_50px_100px_-20px_rgba(37,99,235,0.3)] border border-white/40 dark:border-white/10">
           <button 
             @click="closePost"
-            class="absolute top-8 left-8 z-30 w-14 h-14 bg-slate-900/50 hover:bg-primary-600 text-white rounded-2xl flex items-center justify-center transition-all shadow-2xl backdrop-blur-xl"
+            class="absolute top-8 left-8 z-30 w-14 h-14 bg-white/40 dark:bg-slate-900/50 hover:bg-red-500 hover:text-white dark:text-white rounded-full flex items-center justify-center transition-all duration-300 shadow-2xl backdrop-blur-xl border border-white/40 dark:border-white/10"
           >
             <XMarkIcon class="w-8 h-8" />
           </button>
 
-          <div class="overflow-y-auto custom-scrollbar">
-            <div class="aspect-[21/9] relative">
+          <div class="overflow-y-auto custom-scrollbar relative">
+             <!-- Modal Ambient Glow -->
+             <div class="absolute -top-40 -right-40 w-96 h-96 bg-primary-600/30 blur-[120px] rounded-full pointer-events-none"></div>
+
+            <div class="aspect-[21/9] md:aspect-[21/10] relative">
               <img :src="selectedPost.image" :alt="selectedPost.title" class="w-full h-full object-cover">
-              <div class="absolute inset-0 bg-gradient-to-t from-white dark:from-slate-950 via-transparent to-transparent"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-white/90 dark:from-slate-900/90 via-transparent to-transparent"></div>
             </div>
 
-            <div class="px-8 md:px-24 pb-24 -mt-32 relative z-10">
+            <div class="px-8 md:px-16 py-12 pb-24 mx-4 md:mx-12 -mt-24 mb-12 relative z-10 glass-card bg-white/60 dark:bg-slate-900/70 border border-white/50 dark:border-white/10 rounded-[3.5rem] shadow-2xl shadow-primary-900/5 backdrop-blur-3xl">
               <div class="flex flex-wrap items-center gap-4 mb-10">
                 <span class="bg-primary-600 text-white px-8 py-3 rounded-2xl text-sm font-black shadow-2xl shadow-primary-600/30">
                   {{ selectedPost.category }}
@@ -423,6 +429,18 @@ const closePost = () => {
 .dark .glass {
   background: rgba(15, 23, 42, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+}
+
+.dark .glass-card {
+  background: rgba(15, 23, 42, 0.45);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
 
 .custom-scrollbar::-webkit-scrollbar { width: 8px; }

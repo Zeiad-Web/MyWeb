@@ -69,7 +69,7 @@ const contactInfo = [
   {
     title: 'الموقع',
     value: ' اليمن , صنعاء',
-    link: 'https://maps.google.com/?q=Sanaa,Yemen',
+    link: '#',
     icon: MapPinIcon,
     color: 'from-purple-500 to-pink-500',
     delay: '200'
@@ -80,8 +80,8 @@ const contactInfo = [
 <template>
   <div class="relative min-h-screen pt-32 pb-24 px-6 overflow-hidden">
     <!-- Sophisticated Background Glows -->
-    <div class="absolute top-[-10%] right-[-10%] w-[800px] h-[800px] bg-primary-500/10 blur-[150px] rounded-full -z-10 animate-pulse-slow"></div>
-    <div class="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-indigo-500/10 blur-[120px] rounded-full -z-10 animate-pulse-slow-reverse"></div>
+    <div class="absolute top-[-10%] right-[-10%] w-200 h-200 bg-primary-500/10 blur-[150px] rounded-full -z-10 animate-pulse-slow"></div>
+    <div class="absolute bottom-[-10%] left-[-10%] w-150 h-150 bg-indigo-500/10 blur-[120px] rounded-full -z-10 animate-pulse-slow-reverse"></div>
 
     <div class="max-w-7xl mx-auto space-y-20">
       <header class="text-center space-y-6 reveal" dir="rtl">
@@ -90,7 +90,7 @@ const contactInfo = [
           <span>متاح رسمياً للمشاريع</span>
         </div>
         <h1 class="text-5xl md:text-8xl font-black tracking-tight text-slate-900 dark:text-white leading-tight">
-          لنحوّل <span class="bg-gradient-to-r from-primary-600 to-cyan-500 bg-clip-text text-transparent">رؤيتك</span> <br> 
+          لنحوّل <span class="bg-linear-to-r from-primary-600 to-cyan-500 bg-clip-text text-transparent">رؤيتك</span> <br> 
           إلى واقع رقمي.
         </h1>
         <p class="text-slate-500 max-w-3xl mx-auto text-xl md:text-2xl leading-relaxed">
@@ -104,11 +104,11 @@ const contactInfo = [
           <div 
             v-for="info in contactInfo" 
             :key="info.title" 
-            class="group glass p-8 rounded-[2.5rem] border border-white/20 dark:border-white/5 hover:translate-y-[-8px] transition-all duration-500 hover:shadow-2xl hover:shadow-primary-500/10 reveal"
+            class="group glass p-8 rounded-4xl border border-white/20 dark:border-white/5 hover:-translate-y-2 transition-all duration-500 hover:shadow-2xl hover:shadow-primary-500/10 reveal"
             :style="{ transitionDelay: info.delay + 'ms' }"
           >
             <a :href="info.link" target="_blank" rel="noopener noreferrer" class="flex items-center gap-6">
-              <div :class="`w-16 h-16 bg-gradient-to-br ${info.color} rounded-2xl flex items-center justify-center shadow-lg group-hover:rotate-12 transition-transform duration-500 text-white` ">
+              <div :class="`w-16 h-16 bg-linear-to-br ${info.color} rounded-2xl flex items-center justify-center shadow-lg group-hover:rotate-12 transition-transform duration-500 text-white` ">
                 <component :is="info.icon" class="w-8 h-8" />
               </div>
               <div class="text-right">
@@ -120,7 +120,7 @@ const contactInfo = [
 
           <!-- Ultra-Luxury Quick Chat -->
           <div class="relative group reveal overflow-hidden rounded-[3rem]" style="transition-delay: 200ms">
-            <div class="absolute inset-0 bg-gradient-to-br from-primary-600 to-indigo-700"></div>
+            <div class="absolute inset-0 bg-linear-to-br from-primary-600 to-indigo-700"></div>
             <div class="absolute -top-12 -right-12 w-48 h-48 bg-white/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-1000"></div>
             
             <div class="relative p-10 space-y-8 text-white">
@@ -133,7 +133,7 @@ const contactInfo = [
               </div>
               <div class="flex gap-4">
                  <a href="https://wa.me/967775932431" target="_blank" rel="noopener noreferrer" class="flex-1 bg-white/10 hover:bg-white/20 py-4 rounded-2xl backdrop-blur-xl font-black transition-all border border-white/10 text-center">WhatsApp</a>
-                 <a href="#" target="_blank" rel="noopener noreferrer" class="flex-1 bg-white/10 hover:bg-white/20 py-4 rounded-2xl backdrop-blur-xl font-black transition-all border border-white/10 text-center">LinkedIn</a>
+                 <a href="https://www.linkedin.com/in/zeiad-al-ariqi-91b431376/" target="_blank" rel="noopener noreferrer" class="flex-1 bg-white/10 hover:bg-white/20 py-4 rounded-2xl backdrop-blur-xl font-black transition-all border border-white/10 text-center">LinkedIn</a>
               </div>
             </div>
           </div>
@@ -235,9 +235,9 @@ const contactInfo = [
                 <button 
                   type="submit" 
                   :disabled="loading"
-                  class="relative w-full group/btn overflow-hidden bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-black py-6 rounded-[2rem] transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-70 shadow-2xl flex items-center justify-center gap-4"
+                  class="relative w-full group/btn overflow-hidden bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-black py-6 rounded-4xl transition-all hover:scale-[1.02] active:scale-[0.98]"
                 >
-                  <div class="absolute inset-0 bg-gradient-to-r from-primary-600 to-cyan-500 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500"></div>
+                  <div class="absolute inset-0 bg-linear-to-r from-primary-600 to-cyan-500 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500"></div>
                   
                   <template v-if="loading">
                     <div class="relative flex items-center gap-3">
@@ -250,7 +250,7 @@ const contactInfo = [
                   </template>
                   <template v-else>
                     <span class="relative text-xl">بدء المحادثة الآن</span>
-                    <PaperAirplaneIcon class="relative w-6 h-6 group-hover/btn:translate-x-[-8px] group-hover/btn:translate-y-[-8px] transition-transform" />
+                    <PaperAirplaneIcon class="relative w-6 h-6 group-hover/btn:-translate-x-2 group-hover/btn:-translate-y-2 transition-transform" />
                   </template>
                 </button>
               </div>

@@ -1,0 +1,53 @@
+
+نظام نقطة بيع (Point of Sale) متكامل مبني بـ Laravel 10 و MySQL، مصمم لإدارة المتاجر بكفاءة عالية — يتيح التعامل مع المبيعات، المخزون، الموظفين، والماليات من لوحة تحكم واحدة، بواجهة متجاوبة.
+
+المشروع
+واجهة POS ذكية: إضافة منتجات للسلة، بحث سريع بالاسم/الرمز، وحساب فوري للضريبة والإجمالي.
+إدارة المخزون: خصم تلقائي من المخزون عند البيع، دعم الباركود، وتصنيف هرمي للمنتجات.
+إدارة الموظفين والرواتب: تتبع الحضور، رواتب شهرية، وسلف بسياقها التاريخي.
+المبيعات والأوامر: تتبع الأوامر المعلقة/المكتملة/المستحقة، فواتير قابلة للطباعة.
+لوحة تحكم تحليلية: رسوم بيانية (ApexCharts) لاتجاهات المبيعات وأكثر المنتجات مبيعًا.
+صلاحيات RBAC: تحكم دقيق بالأدوار والصلاحيات عبر spatie/laravel-permission.
+نسخ احتياطي تلقائي لقاعدة البيانات.
+المهام والنتائج (المميزات الوظيفية)
+المهمة	النتيجة
+إجراء عملية بيع سريعة	سلة ديناميكية + حساب ضريبة لحظي
+بيع بالباركود	مولّد باركود لكل منتج
+إدارة الموظفين	ملفات موظفين + حضور + سلف
+دفع الرواتب	نظام رواتب وسلف شهري
+تقارير المبيعات	رسوم بيانية تفاعلية
+إصدار الفواتير	طباعة فواتير احترافية
+التقنيات
+Backend: Laravel 10، PHP 8.2+
+Frontend: Blade، Bootstrap، Tailwind CSS، Vanilla JS، Heroicons
+Database: MySQL
+مكتبات أساسية: hardevine/shoppingcart (السلة)، spatie/laravel-permission (الصلاحيات)، spatie/laravel-backup (النسخ الاحتياطي)، picqer/php-barcode-generator، phpoffice/phpspreadsheet (تصدير Excel)
+العميل
+المشروع مفتوح المصدر (رخصة MIT) من تطوير Fajar Ghifari Nugroho — لا توجد بيانات عميل محدد داخل الكود؛ إن كان لديك عميل فعلي لهذا المشروع أخبرني لإضافته في التوثيق.
+
+
+
+
+
+
+
+
+
+
+ Key Features
+🛒 Point of Sale (POS) Interface
+Efficient Transaction Processing: Fast and user-friendly interface for managing sales and carts.
+Smart Search: Quickly find products by name or code.
+Dynamic Cart: Real-time subtotal and tax calculations using hardevine/shoppingcart.
+📦 Inventory & Product Management
+Stock Tracking: Automated stock deduction upon sale completion.
+Barcode Support: Integrated picqer/php-barcode-generator for product operational efficiency.
+Category Management: Organize products into hierarchical categories for easier access.
+👥 HR & User Management
+Employee Management: Track employee details, salaries, and attendance.
+Payroll System: Manage advance salaries and monthly payroll with history tracking.
+Role-Based Access Control (RBAC): Granular permission management powered by spatie/laravel-permission to secure sensitive modules.
+💰 Financial & Reporting
+Order Management: Track Pending, Completed, and Due status orders.
+Interactive Dashboard: Visual analytics using ApexCharts for sales trends and top-selling products.
+Invoice Generation: Professional invoice printing for every transaction.

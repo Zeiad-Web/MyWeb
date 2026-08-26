@@ -4,7 +4,8 @@ import {
   BriefcaseIcon, 
   DocumentArrowDownIcon,
   CheckCircleIcon,
-  LanguageIcon
+  LanguageIcon,
+  CodeBracketIcon
 } from '@heroicons/vue/24/outline'
 
 // يمكنك استخدام الصور من مجلد public مباشرة هكذا بدون import
@@ -97,6 +98,17 @@ const languagesData = [
               alt="Ziad Al-Oraiqi Professional Profile" 
               class="rounded-2xl hover:scale-105 transition-all duration-700 w-full h-[500px] object-cover"
             >
+            <div class="absolute bottom-6 left-6 right-6 p-4 glass rounded-xl" dir="ltr">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-primary-500 flex items-center justify-center text-white">
+                      <CodeBracketIcon class="w-6 h-6" />
+                    </div>
+                    <div class="text-left">
+                      <p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Active coding</p>
+                      <p class="text-sm font-bold">100+ Commits/mo</p>
+                    </div>
+                  </div>
+            </div>
           </div>
         </div>
 

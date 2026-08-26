@@ -27,7 +27,7 @@ const services = [
     title: 'نشر وإدارة الاستضافات السحابية',
     text: 'نشر احترافي للمشاريع عبر Vercel و Hostinger، يشمل إعداد السيرفرات، ربط النطاقات، وتأمين الموقع بشهادات SSL لضمان انطلاقة تقنية آمنة وخالية من الأخطاء.',
     icon: CloudArrowUpIcon,
-    features: ['إدارة سيرفرات AWS/Vercel', 'شهادات SSL مجانية', 'نسخ احتياطي تلقائي']
+    features: ['إدارة سيرفرات AWS/Vercel', 'شهادات SSL مجانية', 'تحسين محركات البحث (SEO)']
   },
   {
     title: 'الهوية البصرية والحلول الإبداعية',
@@ -99,7 +99,7 @@ onMounted(() => {
       <section class="text-center space-y-8 reveal py-12" dir="rtl">
         <div class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-primary-500/10 text-primary-600 dark:text-primary-400 font-black text-sm mb-4 border border-primary-500/20 shadow-lg shadow-primary-500/5">
            <SparklesIcon class="w-5 h-5 animate-pulse" />
-           <span>نصمم المستقبل بلمسة إبداع</span>
+           <span>اصمم المستقبل بلمسة إبداع</span>
         </div>
         <h1 class="text-4xl md:text-7xl font-black text-slate-900 dark:text-white leading-tight">
           احول رؤيتك إلى <span class="bg-gradient-to-l from-primary-600 to-cyan-500 bg-clip-text text-transparent">واقع رقمي</span> مبهر.

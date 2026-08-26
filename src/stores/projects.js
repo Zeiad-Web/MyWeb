@@ -4,118 +4,187 @@ export const useProjectsStore = defineStore('projects', {
     state: () => ({
         projects: [
             {
-                slug: 'smart-real-estate',
-                title: 'نظام إدارة العقارات الذكي',
+                slug: 'abo-hussein-kitchens',
+                title: 'موقع ابو حسين للمطابخ',
                 category: 'Full Stack',
-                client: 'شركة العقارات المتحدة',
-                websiteUrl: 'https://real-estate-demo.com',
-                languages: ['Nuxt 3', 'Node.js', 'PostgreSQL'],
-                description: 'منصة لإدارة العقارات والمبيعات مع تحليل ذكي للسوق وتقارير آلية.',
-                longDescription: 'هذا المشروع هو منصة متكاملة تهدف إلى تسهيل عملية إدارة العقارات والمبيعات. قمت ببناء النظام باستخدام Nuxt 3 للواجهة الأمامية و Node.js للخلفية، مع قاعدة بيانات PostgreSQL. يتضمن النظام لوحة تحكم متقدمة، نظام تنبيهات، وتقارير دورية تعتمد على تحليل البيانات.',
-                image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                tags: ['Nuxt 3', 'Node.js', 'PostgreSQL'],
+                client: 'أبو حسين لتفصيل المطابخ – مؤسسة رائدة في سوق الرياض',
+                websiteUrl: 'https://abo-hussein-kitchens.com/',
+                videoUrl: '/images/project/project.png',
+                languages: ['Laravel', 'Vue 3', 'Nuxt 3', 'TailwindCSS', 'Filament'],
+                description: 'موقع رقمي متطورة لتصميم وتفصيل المطابخ الفاخرة في الرياض، تجمع بين فخامة العرض وسلاسة تجربة المستخدم.',
+                longDescription: 'موقع رقمي متكاملة وعصرية متخصصة في عرض خدمات تفصيل وتصميم المطابخ الفاخرة في مدينة الرياض. يهدف الموقع إلى تقديم تجربة مستخدم استثنائية تجمع بين الفخامة في التصميم وسهولة الوصول للخدمات، مع التركيز على إبراز جودة العمل والخبرة الطويلة للعلامة التجارية (أبو حسين للمطابخ).  .',
+                image: '/images/project/project.png',
+                tags: ['Vue 3', 'TailwindCSS', 'Nuxt 3', 'Laravel', 'Filament',],
                 tasksAccomplished: [
-                    'تصميم وبناء قاعدة البيانات وتحسين الاستعلامات.',
-                    'تطوير واجهة المستخدم باستخدام تقنيات حديثة وتفاعلية.',
-                    'دمج بوابات الدفع الإلكتروني وتأمين المعاملات.',
-                    'إعداد نظام تقارير ذكي يعتمد على تحليلات السوق.'
+                    ' (Dashboard): بناء لوحة تحكم متقدمة باستخدام Filament PHP تتيح إدارة كاملة للمحتوى (المدونات، الخدمات، معرض الأعمال) .',
+                    'تطوير واجهة مستخدم سريعة جداً باستخدام Nuxt.js و Vue.js لضمان تجربة تصفح سلسة (SSR) توافق تطلعات العملاء في سوق الرياض.',
+                    ' تحسين محركات البحث (SEO): تهيئة النظام برمجياً لدعم الـ SEO بشكل كامل، مما يضمن ظهور خدمات تفصيل المطابخ في أوائل نتائج البحث لزيادة الوصول العضوي.',
+                    'هندسة معرض وسائط تفاعلي غامر (Immersive Media Hub) يدمج بسلاسة بين الصور عالية الدقة والفيديوهات السينمائية، مع معمارية لغوية ذكية توفر تجربة تصفح عالمية فائقة السلاسة.',
+
                 ]
             },
+             {
+                slug: 'noor-quran',
+                title: 'نور القران',
+                category: 'Frontend',
+                client: 'صدقة جاريه',
+                websiteUrl: 'https://rattel-alquran.vercel.app/',
+                videoUrl: '/images/project/project9.png',
+                languages: ['Nuxt 3', 'Vue 3', 'TailwindCSS'],
+                description: 'موقع إسلامي حديث وشامل يُتيح للمسلم قراءة وتدبر القرآن الكريم،,ومكتبة التفسير الشاملة ,الاستماع لكبار القراء..',
+                longDescription: '.موقع إسلامي حديث وشامل يُتيح للمسلم قراءة وتدبر القرآن الكريم،,ومكتبة التفسير الشاملة ,الاستماع لكبار القراء، ومتابعة الأذكار اليومية بكل سهولة وبدون إنترنت.',
+                image: '/images/project/project9.png',
+                tags: ['TailwindCSS', 'Vue 3', 'Nuxt 3'],
+                tasksAccomplished: [
+                    'قراءة القرآن الكريم المصحف الشريف المصور والتفاعلي: عرض صفحات مصحف المدينة النبوية ',
+                    'مكتبة التفسير الشاملة: عرض الآيات مقترنة بالتفاسير المعتمدة (التفسير الميسر، ابن كثير، السعدي) مع محرك بحث سريع',
+                    ' الاستماع إلى القرآن الكريم بأصوات كبار القراء والأذكار والمسبحة الإلكترونية أذكار الصباح والمساء وحصن المسلم.'
+                ]
+            },
+            
             {
-                slug: 'smart-energy-dashboard',
-                title: 'لوحة تحكم الطاقة الذكية',
+                slug: 'arab-house-kitchens',
+                title: 'موقع البيت العربي للمطابخ',
+                category: 'Frontend',
+                client: 'البيت العربي لتفصيل المطابخ – مؤسسة رائدة في سوق الرياض',
+                websiteUrl: 'https://riyadh-kitchens.vercel.app/',
+                videoUrl: '/images/project/project1.png',
+                languages: ['Nuxt 3', 'Vue 3', 'TailwindCSS'],
+                description: 'موقع إلكتروني تعريفي وتفاعلي متكامل مخصص لعرض خدمات تصميم وتفصيل وتنفيذ المطابخ في مدينة الرياض (مودرن، كلاسيك، ألمنيوم، خشب، رخام وغيرها).',
+                longDescription: 'موقع إلكتروني تعريفي وتفاعلي متكامل مخصص لعرض خدمات تصميم وتفصيل وتنفيذ المطابخ في مدينة الرياض (مودرن، كلاسيك، ألمنيوم، خشب، رخام وغيرها).',
+                image: '/images/project/project1.png',
+                tags: ['TailwindCSS', 'Vue 3', 'Nuxt 3'],
+                tasksAccomplished: [
+                    'جذب العملاء وتسهيل طلب الاستشارات والمعاينات المجانية.وتمكين العميل من استكشاف أنواع المطابخ المختلفة واختيار الخامة المناسبة قبل الشراء.',
+                    'تحسين محركات البحث (SEO): تهيئة النظام برمجياً لدعم الـ SEO بشكل كامل.',
+                    'إتاحة التواصل المباشر مع فريق المبيعات والدعم عبر الواتساب والهاتف.وتوفير تجربة مستخدم سلسة متعددة اللغات (عربي / إنجليزي).'
+                ]
+            },
+           
+            {
+                slug: 'amaken',
+                title: 'أماكن للهندسة والمقاولات والديكور',
                 category: 'Full Stack',
-                client: 'EcoSmart Solutions',
-                websiteUrl: 'https://energy-dashboard.eco',
-                languages: ['Vue 3', 'Tailwind v4', 'Node.js'],
-                description: 'واجهة تحليلية متطورة لمراقبة استهلاك الطاقة في المباني الذكية باستخدام تقنيات IoT وتحليل البيانات.',
-                longDescription: 'مشروع مبتكر يهدف إلى تحسين كفاءة استهلاك الطاقة في المباني الذكية. يعتمد النظام على حساسات IoT لجمع البيانات ومعالجتها فورياً لعرضها على لوحة تحكم تفاعلية تساعد المستخدمين على اتخاذ قرارات مبنية على بيانات دقيقة.',
-                image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                tags: ['Vue 3', 'Tailwind v4', 'Node.js'],
+                client: 'المهندس وائل عثمان',
+                websiteUrl: 'https://amaken.com',
+                videoUrl: '/images/project/project5.png',
+                languages: ['Laravel'],
+                description: 'مكتب "أماكن" عبارة عن مكتب هندسة ومقاولات وديكور متكاملة، متخصصة في تحويل الأفكار إلى واقع ملموس.',
+                longDescription: 'مكتب "أماكن" عبارة عن مكتب هندسة ومقاولات وديكور متكاملة، متخصصة في تحويل الأفكار إلى واقع ملموس. نقدم حلولاً مبتكرة في التصميم الداخلي والإشراف على المشاريع وتنفيذ أعمال المقاولات.',
+                image: '/images/project/project5.png',
+                tags: ['Laravel', 'Vue 3', 'TailwindCSS'],
                 tasksAccomplished: [
-                    'الربط مع حساسات IoT ومعالجة تدفق البيانات اللحظي.',
-                    'تطوير رسوم بيانية تفاعلية باستخدام D3.js لتحليل الاستهلاك.',
-                    'تنفيذ نظام تنبيهات فورية عند تجاوز حدود الاستهلاك المسموح بها.',
-                    'تحسين أداء الواجهة لضمان سرعة الاستجابة.'
+                    'واجهة مستخدم عصرية ومتجاوبة تصميم جذاب يعكس الاحترافية ويتكيف مع جميع الأجهزة',
+                    'عرض الخدمات الهندسية: صفحات تفصيلية مخصصة لكل خدمة (تصميم، مقاولات، ديكور) مع شرح واضح للمراحل.',
+                    'عرض احترافي لمشاريع المكتب المنجزة مع صور عالية الجودة وتفاصيل كل مشروع',
+                    '(Dashboard): بناء لوحة تحكم متقدمة تتيح إدارة كاملة للمحتوى'
                 ]
             },
             {
-                slug: 'fitness-app',
-                title: 'تطبيق اللياقة البدنية',
-                category: 'Mobile',
-                client: 'FitLife Gym',
-                websiteUrl: 'https://fitlife-app.com',
-                languages: ['Flutter', 'Firebase'],
-                description: 'تطبيق جوال لمتابعة التمارين الرياضية مع نظام تنبيهات ذكي.',
-                longDescription: 'تطبيق جوال متكامل يساعد المستخدمين على تتبع نشاطهم البدني، وضع أهداف يومية، ومشاركة تقدمهم مع الآخرين. تم تطوير التطبيق باستخدام Flutter لضمان أداء عالٍ على كل من Android و iOS.',
-                image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                tags: ['Flutter', 'Firebase'],
+                slug: 'yemen-jobs',
+                title: 'منصة توظيف في اليمن (YemenJobs)',
+                category: 'Full Stack',
+                client: 'YemenJobs',
+                websiteUrl: 'https://github.com/Zeiad-Web/laravel-job',
+                videoUrl: '/images/project/project4.png',
+                languages: ['Laravel', 'Vue 3', 'TailwindCSS'],
+                description: 'منصة توظيف متكاملة تهدف إلى ربط أصحاب الأعمال بالكوادر المؤهلة في مختلف المجالات بيئة رقمية سهلة الاستخدام.',
+                longDescription: 'منصة توظيف متكاملة تهدف إلى ربط أصحاب الأعمال بالكوادر المؤهلة في مختلف المجالات. يوفر الموقع بيئة رقمية سهلة الاستخدام تتيح لأصحاب الشركات نشر الوظائف الشاغرة، وللباحثين عن عمل تقديم طلبات التوظيف.',
+                image: '/images/project/project4.png',
+                tags: ['TailwindCSS', 'Vue 3', 'Laravel'],
                 tasksAccomplished: [
-                    'بناء نظام تتبع التمارين والسعرات الحرارية.',
-                    'تكامل مع Google Fit و Apple Health.',
-                    'تطوير نظام اجتماعي لمشاركة التحديات والنتائج.',
-                    'إضافة خاصية التذكيرات الذكية والمخصصة.'
+                    'تسجيل ودخول آمن للمستخدمين مع تقسيم الأدوار والصلاحيات.',
+                    'إمكانية إضافة وتعديل الوظائف وتصفيتها حسب الموقع، الراتب، والتخصص.',
+                    'تنبيهات وإشعارات فورية وتتبع حالة الطلبات.'
                 ]
             },
             {
-                slug: 'ar-interior-design',
-                title: 'رؤية التصميم الداخلي بتقنية AR',
-                category: 'Mobile',
-                client: 'Modern Spaces',
-                websiteUrl: 'https://ar-spaces.com',
-                languages: ['SwiftUI', 'ARKit', 'Firebase'],
-                description: 'تطبيق جوال يتيح للمستخدمين تصور قطع الأثاث في منازلهم باستخدام الواقع المعزز (AR) بدقة عالية.',
-                longDescription: 'تجربة فريدة في عالم التصميم الداخلي، حيث يسمح التطبيق للمستخدمين بوضع نماذج ثلاثية الأبعاد للأثاث في مساحاتهم الفعلية باستخدام تقنية الواقع المعزز للتأكد من الملاءمة قبل الشراء.',
-                image: 'https://images.unsplash.com/photo-1551650992-ee4fd47df41f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                tags: ['SwiftUI', 'ARKit', 'Firebase'],
+                slug: 'hr-system',
+                title: 'نظام إدارة الموارد البشرية (HR System)',
+                category: 'Full Stack',
+                client: 'HR System',
+                websiteUrl: 'https://hr-system.com',
+                videoUrl: '/images/project/project7.png',
+                languages: ['Laravel', 'Bootstrap'],
+                description: 'نظام إدارة الموارد البشرية الشامل، يهدف إلى أتمتة وإدارة كافة العمليات والأنشطة الإدارية الخاصة بالشركات والمؤسسات.',
+                longDescription: 'نظام إدارة الموارد البشرية الشامل، يهدف النظام إلى أتمتة وإدارة كافة العمليات والأنشطة الإدارية الخاصة بالشركات والمؤسسات، بدءاً من استقطاب وتوظيف الكفاءات، وحتى إدارة شؤون الموظفين، الحضور والانصراف، ومسير الرواتب.',
+                image: '/images/project/project7.png',
+                tags: ['Bootstrap', 'Laravel'],
                 tasksAccomplished: [
-                    'تطوير محرك عرض النماذج ثلاثية الأبعاد بدقة واقعية.',
-                    'تطبيق خوارزميات قياس المساحات باستخدام الحساسات.',
-                    'دعم العرض المباشر والتفاعل مع الإضاءة المحيطة.',
-                    'تكامل مع متجر إلكتروني لطلب المنتجات مباشرة.'
+                    'وحدة إدارة الموظفين والأقسام وسجلات الدوام ونظام الصلاحيات.',
+                    'وحدة الإجازات والحضور لتتبع طلبات الإجازات والشاشة المباشرة.',
+                    'وحدة إدارة الرواتب وكشوفات الأجور الشهرية.',
+                    'وحدة بوابة التوظيف واستقبال الطلبات.'
                 ]
             },
             {
-                slug: 'jewelry-store',
-                title: 'متجر المجوهرات الراقي',
-                category: 'Frontend',
-                client: 'Elara Diamonds',
-                websiteUrl: 'https://elara-jewelry.com',
-                languages: ['Vue 3', 'GSAP Animation'],
-                description: 'تجربة تسوق فاخرة مع حركات تفاعلية مخصصة وأداء فائق السرعة.',
-                longDescription: 'متجر إلكتروني يركز على الفخامة والجمال البصري. تم استغلال مكتبة GSAP لإنشاء حركات انتقالية سلسة تبهر المستخدمين وتمنحهم تجربة فريدة تتناسب مع قيمة المنتجات المعروضة.',
-                image: 'https://images.unsplash.com/photo-1547949003-9792a18a2601?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                tags: ['Vue 3', 'GSAP Animation'],
+                slug: 'e-commerce',
+                title: 'منصة التجارة الإلكترونية (E-Commerce)',
+                category: 'Full Stack',
+                client: 'E-Commerce Platform',
+                websiteUrl: 'https://ecommerce.com',
+                videoUrl: '/images/project/project2.png',
+                languages: ['Livewire', 'Laravel',],
+                description: 'منصة تقنية متكاملة تتيح بيع وشراء المنتجات والخدمات عبر الإنترنت بمرونة وأمان عالٍ.',
+                longDescription: 'نظام التجارة الإلكترونية هو منصة تقنية تسمح للشركات أو الأفراد ببيع وشراء المنتجات أو الخدمات عبر الإنترنت، يشمل عرض المنتجات، معالجة الطلبات، الدفع الإلكتروني، وإدارة الشحن والتوصيل.',
+                image: '/images/project/project2.png',
+                tags: ['Livewire', 'Laravel',],
                 tasksAccomplished: [
-                    'تصميم وتنفيذ حركات تفاعلية مخصصة لكل صفحة.',
-                    'تحسين تجربة المستخدم وتحميل الصور بدقة عالية وسرعة.',
-                    'تطوير واجهة العرض ثلاثية الأبعاد للمجوهرات.',
-                    'بناء نظام تصفية وبحث متطور وسهل الاستخدام.'
+                    'عرض المنتجات مع فلاتر حسب الفئة والسعر والتقييم.',
+                    'إدارة الطلبات والشحن وسلة الشراء والخصومات.',
+                    'بوابة دفع إلكترونية خيارات دفع متناسبة.'
                 ]
             },
+                {
+                slug: 'school-system',
+                title: 'نظام المدارس الالكتروني',
+                category: 'Full Stack',
+                client: 'Electronic School System',
+                websiteUrl: 'https://github.com/Zeiad-Web',
+                videoUrl: '/images/project/project8.png',
+                languages: ['Laravel', 'Bootstrap'],
+                description: 'يُعدّ نظام إدارة المدارس منصة تقنية متكاملة تهدف إلى أتمتة جميع العمليات الإدارية والتعليمية داخل المؤسسة التعليمية في مكان واحد.',
+                longDescription: ' يُعدّ نظام إدارة المدارس منصة تقنية متكاملة تهدف إلى أتمتة جميع العمليات الإدارية والتعليمية داخل المؤسسة التعليمية في مكان واحد. يوفّر هذا النظام بيئة رقمية موحّدة تربط بين الإدارة، المعلمين، الطلاب، وأولياء الأمور..',
+                image: '/images/project/project8.png',
+                tags: ['Livewire', 'Laravel',],
+               tasksAccomplished: [
+    'إدارة الطلاب: التسجيل، الحضور والغياب، الإنذارات، الفصول، الأقسام، الدرجات والشهادات.',
+    'إدارة المعلمين والموظفين: البيانات، الحصص، الجداول، الأجور، الإجازات والصلاحيات.',
+    'إدارة النظام: المستخدمين، المواد الدراسية، الامتحانات والدرجات، مع إمكانية إنشاء وطباعة الشهادات.',
+    'بوابة الطالب: الاطلاع على الجدول والدرجات والحضور والغياب وتحميل المواد التعليمية.',
+    'بوابة المعلم: إدارة الفصول والمواد، إدخال الدرجات، رفع المواد وإعداد الجداول حسب الصلاحيات.'
+]
+            },
             {
-                slug: 'crypto-pulse',
-                title: 'نبض الكريبتو للتحليلات',
-                category: 'Frontend',
-                client: 'Pulse Analytics',
-                websiteUrl: 'https://crypto-pulse.analytx',
-                languages: ['React', 'D3.js', 'WebSocket'],
-                description: 'منصة عرض بيانات حية للعملات الرقمية مع رسوم بيانية تفاعلية وتنبيهات فورية لتغيرات السوق.',
-                longDescription: 'أداة تحليلية قوية للمتداولين في سوق العملات الرقمية. يتم عرض البيانات بشكل حي باستخدام WebSockets، مع توفير رسوم بيانية تفاعلية تمكن المستخدمين من تحليل الاتجاهات بدقة.',
-                image: 'https://images.unsplash.com/photo-1518546305927-5a555bb7020d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                tags: ['React', 'D3.js', 'WebSocket'],
+                slug: 'pos-system',
+                title: 'نظام نقطة البيع (POS System)',
+                category: 'Backend',
+                client: 'Point of Sale System',
+                websiteUrl: 'https://pos-system.com',
+                videoUrl: '/images/project/project6.png',
+                languages: ['Laravel', 'Bootstrap'],
+                description: 'نظام إداري متكامل لإدارة المبيعات والمخزون والموظفين والعمليات المالية عبر لوحة تحكم تفاعلية.',
+                longDescription: 'نظام إداري متكامل لإدارة المبيعات والمخزون والموظفين والعمليات المالية، يوفر حلولاً فعّالة لنقاط البيع، إدارة المنتجات والباركود، متابعة المخزون والرواتب، بالإضافة إلى التقارير والفواتير.',
+                image: '/images/project/project6.png',
+                tags: ['Bootstrap', 'Laravel'],
                 tasksAccomplished: [
-                    'الربط مع واجهات برمجية متعددة لجلب بيانات السوق الحية.',
-                    'بناء رسوم بيانية معقدة وتفاعلية باستخدام D3.js.',
-                    'تحسين استهلاك الذاكرة والتعامل مع تدفق البيانات الكبير.',
-                    'إعداد نظام تنبيهات ذكي يعمل في الخلفية.'
+                    'إدارة المبيعات ونقطة البيع بواجهة POS سريعة وسهلة.',
+                    'إدارة المنتجات وتتبع مستويات المخزون مع التنبيهات.',
+                    'إدارة الصلاحيات والمالية وإصدار الفواتير.'
                 ]
-            }
+            },
+            
+
         ]
     }),
     getters: {
         getProjectBySlug: (state) => (slug) => {
-            return state.projects.find(p => p.slug === slug)
+            if (!slug) return null
+            const decoded = decodeURIComponent(slug).toLowerCase().trim().replace(/\s+/g, '-')
+            return state.projects.find(p => {
+                const pSlug = decodeURIComponent(p.slug).toLowerCase().trim().replace(/\s+/g, '-')
+                return pSlug === decoded || p.slug === slug
+            })
         }
     }
 })

@@ -1,7 +1,7 @@
 <script setup>
 import { PhoneIcon } from '@heroicons/vue/24/outline'
 
-const whatsappNumber = '775932431'
+const whatsappNumber = '967775932431'
 const phoneNumber = '775932431'
 
 const actions = [
