@@ -75,6 +75,9 @@ const educationData = [
 ]
 
 import { ref } from 'vue'
+import { useLanguageStore } from '../stores/language'
+
+const languageStore = useLanguageStore()
 
 const languagesData = [
   { name: 'اللغة العربية', level: '(اللغة الأم)' },
@@ -115,16 +118,16 @@ const languagesData = [
         </div>
 
         <div class="text-right space-y-8 animate-fade-in order-1 lg:order-2" dir="rtl">
-          <h2 class="text-primary-600 font-black tracking-widest uppercase text-sm">من أنا والقصة خلف الكود</h2>
+          <h2 class="text-primary-600 font-black tracking-widest uppercase text-sm">{{ languageStore.locale === 'ar' ? 'من أنا والقصة خلف الكود' : 'About me and the story behind the code' }}</h2>
           <h1 class="text-4xl md:text-6xl font-black leading-tight text-slate-900 dark:text-white">
-            أبني جسوراً بين <span class="text-primary-600">الفكرة</span> والواقع الرقمي.
+            {{ languageStore.locale === 'ar' ? 'أبني جسوراً بين' : 'I build bridges between' }} <span class="text-primary-600">{{ languageStore.locale === 'ar' ? 'الفكرة' : 'ideas' }}</span> {{ languageStore.locale === 'ar' ? 'والواقع الرقمي.' : 'and digital reality.' }}
           </h1>
           <div class="space-y-6 text-xl text-slate-600 dark:text-slate-400 leading-relaxed">
             <p>
-              بدأت رحلتي في عالم برمجة مواقع الويب منذ أكثر من 2 سنوات، كان شغفي دائماً هو كيفية تحويل الأسطر البرمجية الجامدة إلى واجهات حيوية تتفاعل مع المستخدم وتلبي احتياجاته.
+              {{ languageStore.locale === 'ar' ? 'بدأت رحلتي في عالم برمجة مواقع الويب منذ أكثر من سنتين، وكان شغفي دائماً تحويل الأسطر البرمجية إلى واجهات حيوية تتفاعل مع المستخدم وتلبي احتياجاته.' : 'I started my web development journey more than two years ago. I have always enjoyed turning lines of code into lively interfaces that serve real user needs.' }}
             </p>
             <p>
-              أنا لا أقوم بمجرد البرمجة؛ بل أصمم تجارب. أؤمن أن كل بكسل له وزن، وكل حركة لها معنى، والكفاءة هي المعيار الحقيقي للجودة. تخصصت في برمجة مواقع الويب ب استخدام بيئة عمل Vue.js , Laravel لأنها تمنحني المرونة لصياغة واجهات مستخدم مدهشة وسلسة.
+              {{ languageStore.locale === 'ar' ? 'أنا لا أقوم بمجرد البرمجة؛ بل أصمم تجارب. أؤمن أن كل بكسل له وزن، وكل حركة لها معنى، والكفاءة هي المعيار الحقيقي للجودة. تخصصت في Vue.js وLaravel لصياغة واجهات مستخدم مدهشة وسلسة.' : 'I do not just code; I design experiences. Every pixel matters, every motion has meaning, and efficiency is the true measure of quality. I specialize in Vue.js and Laravel to create smooth, impressive interfaces.' }}
             </p>
           </div>
         </div>
@@ -137,13 +140,13 @@ const languagesData = [
         <div class="text-right space-y-6 max-w-4xl animate-fade-in">
           <h3 class="text-primary-500 font-bold text-lg tracking-widest flex items-center gap-3">
              <span class="w-8 h-1 bg-primary-500 rounded-full"></span>
-             الخبرة والتعليم
+             {{ languageStore.locale === 'ar' ? 'الخبرة والتعليم' : 'Experience and education' }}
           </h3>
           <h2 class="text-4xl md:text-7xl font-black text-slate-900 dark:text-white leading-tight">
-             السيرة الذاتية و الخبرات والمؤهلات <span class="bg-gradient-to-l from-primary-600 to-indigo-600 bg-clip-text text-transparent">التميز المهني</span> .
+             {{ languageStore.locale === 'ar' ? 'السيرة الذاتية والخبرات والمؤهلات' : 'My resume, experience and qualifications' }} <span class="bg-gradient-to-l from-primary-600 to-indigo-600 bg-clip-text text-transparent">{{ languageStore.locale === 'ar' ? 'التميز المهني' : 'professional excellence' }}</span>.
           </h2>
           <p class="text-slate-500 dark:text-slate-400 text-xl leading-relaxed">
-            "أصمم وأطور حلول الويب المتقدمة ببراعة في بيئة Laravel & Vue. أركز على تقديم تجارب مستخدم استثنائية وبنية تحتية برمجية صلبة، مع شغف دائم بتوظيف أحدث التقنيات لضمان نجاح المشاريع واستدامتها تقنياً وجمالياً."
+            {{ languageStore.locale === 'ar' ? 'أصمم وأطور حلول الويب المتقدمة ببراعة في بيئة Laravel وVue، مع التركيز على تجارب مستخدم استثنائية وبنية برمجية صلبة.' : 'I design and develop advanced web solutions with Laravel and Vue, focusing on exceptional user experiences and solid technical foundations.' }}
           </p>
         </div>
 
@@ -158,7 +161,7 @@ const languagesData = [
                   <BriefcaseIcon class="w-6 h-6 lg:w-8 lg:h-8 text-white" />
                </div>
                <div>
-                  <h3 class="text-2xl lg:text-3xl font-black text-slate-900 dark:text-white">الخبرة المهنية</h3>
+                  <h3 class="text-2xl lg:text-3xl font-black text-slate-900 dark:text-white">{{ languageStore.locale === 'ar' ? 'الخبرة المهنية' : 'Professional experience' }}</h3>
                   <div class="h-1.5 w-16 lg:w-24 bg-primary-500 mt-2 rounded-full opacity-50"></div>
                </div>
             </div>
@@ -209,7 +212,7 @@ const languagesData = [
                   <AcademicCapIcon class="w-6 h-6 lg:w-8 lg:h-8 text-white" />
                </div>
                <div>
-                  <h3 class="text-2xl lg:text-3xl font-black text-slate-900 dark:text-white">التعليم والمؤهلات</h3>
+                  <h3 class="text-2xl lg:text-3xl font-black text-slate-900 dark:text-white">{{ languageStore.locale === 'ar' ? 'التعليم والمؤهلات' : 'Education and qualifications' }}</h3>
                   <div class="h-1.5 w-16 lg:w-24 bg-cyan-500 mt-2 rounded-full opacity-50"></div>
                </div>
             </div>
@@ -263,7 +266,7 @@ const languagesData = [
                     <div class="absolute -bottom-10 -right-10 w-32 h-32 lg:w-40 lg:h-40 bg-primary-500/10 rounded-full blur-3xl"></div>
 
                     <h3 class="text-xl lg:text-2xl font-black text-slate-900 dark:text-white flex items-center gap-3">
-                      اللغات المتقنة
+                      {{ languageStore.locale === 'ar' ? 'اللغات المتقنة' : 'Languages' }}
                     </h3>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
@@ -293,7 +296,7 @@ const languagesData = [
            >
              <div class="absolute inset-0 bg-primary-600 rounded-2xl lg:rounded-[2rem] blur-xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
              <div class="relative flex items-center justify-center gap-3 lg:gap-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-8 py-4 lg:px-16 lg:py-6 rounded-2xl lg:rounded-[2rem] font-black text-lg lg:text-xl hover:scale-105 transition-all shadow-2xl active:scale-95 border border-white/20">
-               <span class="text-sm lg:text-xl">تحميل ملف الخبرات (PDF)</span>
+               <span class="text-sm lg:text-xl">{{ languageStore.locale === 'ar' ? 'تحميل ملف الخبرات (PDF)' : 'Download resume (PDF)' }}</span>
                <div class="w-8 h-8 lg:w-10 lg:h-10 bg-primary-600 rounded-lg lg:rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform shadow-lg">
                  <DocumentArrowDownIcon class="w-5 h-5 lg:w-6 lg:h-6 text-white" />
                </div>
