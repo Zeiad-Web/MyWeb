@@ -32,6 +32,29 @@ const discoverModel = async (excludedModels = []) => {
 }
 
 export const getGeminiResponse = async (message) => {
+  if (import.meta.env.PROD) {
+    try {
+      const response = await fetch('/api/gemini', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message, history: conversationHistory }),
+      })
+      const data = await response.json()
+      if (!response.ok) throw new Error(data?.error || `HTTP ${response.status}`)
+      const answer = data.answer?.trim()
+      if (!answer) throw new Error('EMPTY_RESPONSE')
+      conversationHistory = [
+        ...conversationHistory,
+        { role: 'user', parts: [{ text: message }] },
+        { role: 'model', parts: [{ text: answer }] },
+      ].slice(-12)
+      return answer
+    } catch (error) {
+      console.error('Gemini proxy error:', error)
+      return `تعذر تشغيل المساعد: ${error?.message || 'خطأ غير معروف'}`
+    }
+  }
+
   if (!apiKey || apiKey === 'YOUR_GEMINI_API_KEY_HERE') {
     return 'المساعد غير مفعّل بعد. أغلق خادم Vite وشغّله من جديد بعد التأكد من وجود VITE_GEMINI_API_KEY في ملف .env. إذا كنت تفتح مجلد dist فأعد بناء المشروع أولاً.'
   }
