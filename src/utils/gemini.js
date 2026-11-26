@@ -32,7 +32,9 @@ const discoverModel = async () => {
 }
 
 export const getGeminiResponse = async (message) => {
-  if (!apiKey || apiKey === 'YOUR_GEMINI_API_KEY_HERE') return 'المساعد غير مفعّل: أضف VITE_GEMINI_API_KEY في ملف .env ثم أعد تشغيل المشروع.'
+  if (!apiKey || apiKey === 'YOUR_GEMINI_API_KEY_HERE') {
+    return 'المساعد غير مفعّل بعد. أغلق خادم Vite وشغّله من جديد بعد التأكد من وجود VITE_GEMINI_API_KEY في ملف .env. إذا كنت تفتح مجلد dist فأعد بناء المشروع أولاً.'
+  }
 
   try {
     if (!activeModelName) await discoverModel()
