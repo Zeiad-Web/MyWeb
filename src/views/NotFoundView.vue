@@ -1,6 +1,9 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import { HomeIcon, ArrowLeftIcon } from '@heroicons/vue/24/outline'
+import { useLanguageStore } from '../stores/language'
+
+const languageStore = useLanguageStore()
 </script>
 
 <template>
@@ -26,7 +29,7 @@ import { HomeIcon, ArrowLeftIcon } from '@heroicons/vue/24/outline'
         <div class="glass-card p-8 md:p-12 rounded-[2.5rem] border border-white/20 dark:border-white/5 backdrop-blur-xl bg-white/40 dark:bg-slate-900/40 shadow-2xl reveal-up">
           <div class="space-y-6 max-w-2xl mx-auto">
             <h2 class="text-3xl md:text-5xl font-black text-slate-900 dark:text-white leading-tight" dir="rtl">
-              أووووه! الصفحة التي تبحث عنها <span class="text-primary-600 dark:text-primary-400">غير موجودة</span>
+              {{ languageStore.locale === 'ar' ? 'أوووه! الصفحة التي تبحث عنها' : 'Oops! The page you are looking for is' }} <span class="text-primary-600 dark:text-primary-400">{{ languageStore.locale === 'ar' ? 'غير موجودة' : 'not found' }}</span>
             </h2>
             <p class="text-lg text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
              Oh no! The page you are looking for does not exist..
@@ -40,7 +43,7 @@ import { HomeIcon, ArrowLeftIcon } from '@heroicons/vue/24/outline'
               class="group relative flex items-center gap-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-8 py-4 rounded-2xl font-black transition-all duration-300 hover:scale-105 active:scale-95 shadow-xl shadow-slate-900/20 dark:shadow-white/10"
             >
               <HomeIcon class="w-5 h-5" />
-              <span>العودة للرئيسية</span>
+              <span>{{ languageStore.locale === 'ar' ? 'العودة للرئيسية' : 'Back home' }}</span>
             </RouterLink>
             
             <button 
@@ -48,17 +51,17 @@ import { HomeIcon, ArrowLeftIcon } from '@heroicons/vue/24/outline'
               class="flex items-center gap-3 px-8 py-4 rounded-2xl font-black text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-white/5 transition-colors duration-300"
             >
               <ArrowLeftIcon class="w-5 h-5" />
-              <span>رجوع للخلف</span>
+              <span>{{ languageStore.locale === 'ar' ? 'رجوع للخلف' : 'Go back' }}</span>
             </button>
           </div>
         </div>
 
         <!-- Helpful Links Grid (Extra Info) -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 px-4 opacity-60 hover:opacity-100 transition-opacity duration-500">
-           <RouterLink to="/projects" class="text-xs font-bold hover:text-primary-600">المشاريع</RouterLink>
-           <RouterLink to="/skills" class="text-xs font-bold hover:text-primary-600">المهارات</RouterLink>
-           <RouterLink to="/blog" class="text-xs font-bold hover:text-primary-600">المدونة</RouterLink>
-           <RouterLink to="/contact" class="text-xs font-bold hover:text-primary-600">اتصل بي</RouterLink>
+           <RouterLink to="/projects" class="text-xs font-bold hover:text-primary-600">{{ languageStore.locale === 'ar' ? 'المشاريع' : 'Projects' }}</RouterLink>
+           <RouterLink to="/skills" class="text-xs font-bold hover:text-primary-600">{{ languageStore.locale === 'ar' ? 'المهارات' : 'Skills' }}</RouterLink>
+           <RouterLink to="/blog" class="text-xs font-bold hover:text-primary-600">{{ languageStore.locale === 'ar' ? 'المدونة' : 'Blog' }}</RouterLink>
+           <RouterLink to="/contact" class="text-xs font-bold hover:text-primary-600">{{ languageStore.locale === 'ar' ? 'اتصل بي' : 'Contact' }}</RouterLink>
         </div>
       </div>
     </div>

@@ -14,9 +14,12 @@ import {
   CheckBadgeIcon
 } from '@heroicons/vue/24/outline'
 
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
+import { useLanguageStore } from '../stores/language'
 
-const services = [
+const languageStore = useLanguageStore()
+
+const services = computed(() => languageStore.locale === 'ar' ? [
   {
     title: 'تطوير مواقع الويب المخصصة',
     text: 'بناء تطبيقات ويب متكاملة باستخدام Laravel و Vue، مع التركيز على هندسة قواعد بيانات قوية وأكواد نظيفة قابلة للتوسع لضمان أداء تقني فائق وكفاءة عالية.',
@@ -53,14 +56,26 @@ const services = [
     icon: ChartBarIcon,
     features: ['إدارة مخازن وعملاء', 'تقارير مالية حية', 'صلاحيات مستخدمين']
   }
-]
+] : [
+  { title: 'Custom Web Development', text: 'Building complete web applications with Laravel and Vue, focused on strong database architecture, clean scalable code, and outstanding performance.', icon: CodeBracketIcon, features: ['Advanced cloud architecture', 'Admin dashboards', 'API integrations'] },
+  { title: 'Cloud Hosting & Deployment', text: 'Professional deployment through Vercel and Hostinger, including server setup, domain connection, and SSL security for a safe launch.', icon: CloudArrowUpIcon, features: ['AWS/Vercel server management', 'Free SSL certificates', 'Search engine optimization (SEO)'] },
+  { title: 'Visual Identity & Creative Solutions', text: 'Turning your ideas into a unique visual identity that blends artistic beauty with technical function and attracts your target audience.', icon: PaintBrushIcon, features: ['Modern UX/UI design', 'Brand color consistency', 'Interactive interfaces'] },
+  { title: 'Smart Solutions & Automation', text: 'Developing smart web systems with AI technologies to automate repetitive tasks, improve efficiency, and give your project a lasting competitive edge.', icon: SparklesIcon, features: ['Task automation bots', 'OpenAI/AI integration', 'Smart data analysis'] },
+  { title: 'Ideas into Digital Products', text: 'Turning your technical vision into reality through custom platforms that combine speed and an excellent user experience.', icon: RocketLaunchIcon, features: ['Fast MVP launch', 'Specialized technical consulting', 'Planned gradual scaling'] },
+  { title: 'ERP/CRM Business Systems', text: 'Building custom dashboards and internal management systems to automate complex processes, organize data, and support accurate decisions.', icon: ChartBarIcon, features: ['Inventory and customer management', 'Live financial reports', 'User permissions'] }
+])
 
-const workflowSteps = [
+const workflowSteps = computed(() => languageStore.locale === 'ar' ? [
   { title: 'التخطيط والتحليل', icon: LightBulbIcon, color: 'from-blue-500 to-cyan-400' },
   { title: 'التصميم التفاعلي', icon: CursorArrowRaysIcon, color: 'from-purple-500 to-pink-500' },
   { title: 'التطوير البرمجي', icon: CodeBracketIcon, color: 'from-primary-600 to-indigo-600' },
   { title: 'الإطلاق والدعم', icon: RocketLaunchIcon, color: 'from-emerald-500 to-teal-400' }
-]
+] : [
+  { title: 'Planning & Analysis', icon: LightBulbIcon, color: 'from-blue-500 to-cyan-400' },
+  { title: 'Interactive Design', icon: CursorArrowRaysIcon, color: 'from-purple-500 to-pink-500' },
+  { title: 'Software Development', icon: CodeBracketIcon, color: 'from-primary-600 to-indigo-600' },
+  { title: 'Launch & Support', icon: RocketLaunchIcon, color: 'from-emerald-500 to-teal-400' }
+])
 
 const serviceCards = ref([])
 const activeCardIndex = ref(null)
@@ -99,13 +114,13 @@ onMounted(() => {
       <section class="text-center space-y-8 reveal py-12" dir="rtl">
         <div class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-primary-500/10 text-primary-600 font-black text-sm mb-4 border border-primary-500/20 shadow-lg shadow-primary-500/5">
            <SparklesIcon class="w-5 h-5 animate-pulse" />
-           <span>اصمم المستقبل بلمسة إبداع</span>
+           <span>{{ languageStore.locale === 'ar' ? 'اصمم المستقبل بلمسة إبداع' : 'Designing the future with creativity' }}</span>
         </div>
         <h1 class="text-4xl md:text-7xl font-black text-slate-900 leading-tight">
-          احول رؤيتك إلى <span class="bg-gradient-to-l from-primary-600 to-cyan-500 bg-clip-text text-transparent">واقع رقمي</span> مبهر.
+          {{ languageStore.locale === 'ar' ? 'احول رؤيتك إلى' : 'Turning your vision into' }} <span class="bg-gradient-to-l from-primary-600 to-cyan-500 bg-clip-text text-transparent">{{ languageStore.locale === 'ar' ? 'واقع رقمي' : 'a digital reality' }}</span> {{ languageStore.locale === 'ar' ? 'مبهر.' : 'that stands out.' }}
         </h1>
         <p class="text-slate-500 max-w-3xl mx-auto text-xl leading-relaxed">
-          أقدم حلولاً تقنية متكاملة تتجاوز حدود التوقعات، تجمع بين هندسة الكود المتينة وجمال التصميم الأخّاذ لضمان تجربة مستخدم لا تُنسى.
+          {{ languageStore.locale === 'ar' ? 'أقدم حلولاً تقنية متكاملة تتجاوز حدود التوقعات، تجمع بين هندسة الكود المتينة وجمال التصميم الأخّاذ لضمان تجربة مستخدم لا تُنسى.' : 'I provide complete technical solutions that exceed expectations, combining solid engineering with beautiful design for an unforgettable user experience.' }}
         </p>
       </section>
 
@@ -144,7 +159,7 @@ onMounted(() => {
 
             <!-- Learn More Arrow -->
             <div class="mt-8 flex items-center gap-2 text-primary-600 font-black text-sm group-hover:translate-x-[-8px] transition-transform">
-               <span>اكتشف المزيد</span>
+               <span>{{ languageStore.locale === 'ar' ? 'اكتشف المزيد' : 'Learn more' }}</span>
                <ArrowRightIcon class="w-4 h-4 rotate-180" />
             </div>
           </div>
@@ -154,8 +169,8 @@ onMounted(() => {
       <!-- Workflow Journey Section -->
       <section class="space-y-16 reveal" dir="rtl">
         <div class="text-center space-y-4">
-          <h2 class="text-3xl md:text-5xl font-black">رحلة <span class="bg-gradient-to-l from-primary-600 to-indigo-600 bg-clip-text text-transparent">العمل</span> المتقن</h2>
-          <p class="text-slate-500 max-w-2xl mx-auto text-lg">كيف احول فكرتك من مجرد مسودة إلى منتج رقمي متكامل.</p>
+          <h2 class="text-3xl md:text-5xl font-black">{{ languageStore.locale === 'ar' ? 'رحلة' : 'The journey of' }} <span class="bg-gradient-to-l from-primary-600 to-indigo-600 bg-clip-text text-transparent">{{ languageStore.locale === 'ar' ? 'العمل' : 'quality work' }}</span> {{ languageStore.locale === 'ar' ? 'المتقن' : '' }}</h2>
+          <p class="text-slate-500 max-w-2xl mx-auto text-lg">{{ languageStore.locale === 'ar' ? 'كيف احول فكرتك من مجرد مسودة إلى منتج رقمي متكامل.' : 'How I turn your idea from a simple draft into a complete digital product.' }}</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-4">
@@ -182,16 +197,16 @@ onMounted(() => {
            <div class="absolute top-0 right-0 w-64 h-64 bg-primary-600/20 blur-[100px] rounded-full"></div>
            <div class="absolute bottom-0 left-0 w-64 h-64 bg-cyan-600/20 blur-[100px] rounded-full"></div>
 
-           <h2 class="text-3xl md:text-5xl font-black relative z-10">هل أنت مستعد لبدء مشروعك القادم؟</h2>
-           <p class="text-slate-400 max-w-2xl mx-auto text-xl relative z-10">دعنا نتحدث عن رؤيتك وكيف يمكننا مساعدتك في تحقيقها بأفضل جودة تقنية ممكنة.</p>
+           <h2 class="text-3xl md:text-5xl font-black relative z-10">{{ languageStore.locale === 'ar' ? 'هل أنت مستعد لبدء مشروعك القادم؟' : 'Ready to start your next project?' }}</h2>
+           <p class="text-slate-400 max-w-2xl mx-auto text-xl relative z-10">{{ languageStore.locale === 'ar' ? 'دعنا نتحدث عن رؤيتك وكيف يمكننا مساعدتك في تحقيقها بأفضل جودة تقنية ممكنة.' : 'Let’s discuss your vision and how we can bring it to life with the highest quality.' }}</p>
            
            <div class="flex flex-wrap justify-center gap-6 pt-8 relative z-10">
               <router-link to="/contact" class="flex items-center gap-3 bg-primary-600 text-white px-10 py-5 rounded-3xl font-black hover:scale-105 transition-all shadow-2xl hover:shadow-primary-600/40">
                 <ChatBubbleBottomCenterTextIcon class="w-6 h-6" />
-                <span>احجز استشارتك المجانية</span>
+                <span>{{ languageStore.locale === 'ar' ? 'احجز استشارتك المجانية' : 'Book your free consultation' }}</span>
               </router-link>
               <router-link to="/projects" class="flex items-center gap-3 border-2 border-white/20 px-10 py-5 rounded-3xl font-black hover:bg-white/10 transition-all">
-                <span>رؤية أعمالي</span>
+                <span>{{ languageStore.locale === 'ar' ? 'رؤية أعمالي' : 'View my work' }}</span>
                 <ArrowRightIcon class="w-6 h-6 rotate-180" />
               </router-link>
            </div>

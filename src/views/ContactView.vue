@@ -1,5 +1,6 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useLanguageStore } from '../stores/language'
 import { 
   EnvelopeIcon, 
   MapPinIcon, 
@@ -17,6 +18,7 @@ const subject = ref('')
 const message = ref('')
 const submitted = ref(false)
 const loading = ref(false)
+const languageStore = useLanguageStore()
 
 const submitForm = async () => {
   if (!name.value || !email.value) return
@@ -49,9 +51,9 @@ const submitForm = async () => {
   }, 8000)
 }
 
-const contactInfo = [
+const contactInfo = computed(() => [
   {
-    title: 'رقم الهاتف',
+    title: languageStore.locale === 'ar' ? 'رقم الهاتف' : 'Phone number',
     value: '775932431',
     link: 'https://wa.me/967775932431',
     icon: PhoneIcon,
@@ -59,7 +61,7 @@ const contactInfo = [
     delay: '0'
   },
   {
-    title: 'البريد الإلكتروني',
+    title: languageStore.locale === 'ar' ? 'البريد الإلكتروني' : 'Email',
     value: 'zeiadalriqi@gmail.com',
     link: 'mailto:zeiadalriqi@gmail.com',
     icon: EnvelopeIcon,
@@ -67,14 +69,14 @@ const contactInfo = [
     delay: '100'
   },
   {
-    title: 'الموقع',
-    value: ' اليمن , صنعاء',
+    title: languageStore.locale === 'ar' ? 'الموقع' : 'Location',
+    value: languageStore.locale === 'ar' ? 'اليمن، صنعاء' : 'Sana’a, Yemen',
     link: '#',
     icon: MapPinIcon,
     color: 'from-purple-500 to-pink-500',
     delay: '200'
   }
-]
+])
 </script>
 
 <template>
@@ -87,14 +89,14 @@ const contactInfo = [
       <header class="text-center space-y-6 reveal" dir="rtl">
         <div class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 font-black text-sm tracking-widest uppercase">
           <InformationCircleIcon class="w-5 h-5" />
-          <span>متاح رسمياً للمشاريع</span>
+          <span>{{ languageStore.locale === 'ar' ? 'متاح رسمياً للمشاريع' : 'Available for projects' }}</span>
         </div>
         <h1 class="text-5xl md:text-8xl font-black tracking-tight text-slate-900 dark:text-white leading-tight">
-          لنحوّل <span class="bg-linear-to-r from-primary-600 to-cyan-500 bg-clip-text text-transparent">رؤيتك</span> <br> 
-          إلى واقع رقمي.
+          {{ languageStore.locale === 'ar' ? 'لنحوّل' : 'Let’s turn your' }} <span class="bg-linear-to-r from-primary-600 to-cyan-500 bg-clip-text text-transparent">{{ languageStore.locale === 'ar' ? 'رؤيتك' : 'vision' }}</span> <br> 
+          {{ languageStore.locale === 'ar' ? 'إلى واقع رقمي.' : 'into a digital reality.' }}
         </h1>
         <p class="text-slate-500 max-w-3xl mx-auto text-xl md:text-2xl leading-relaxed">
-          سواء كنت تبحث عن بناء تطبيق او موقع جديد أو تحسين تجربة حالية، أنا هنا لأحول أفكارك إلى تجربة مستخدم لا تُنسى.
+          {{ languageStore.locale === 'ar' ? 'سواء كنت تبحث عن بناء تطبيق أو موقع جديد أو تحسين تجربة حالية، أنا هنا لأحول أفكارك إلى تجربة مستخدم لا تُنسى.' : 'Whether you need a new app, website, or an improved experience, I am here to turn your ideas into an unforgettable user experience.' }}
         </p>
       </header>
 
@@ -128,8 +130,8 @@ const contactInfo = [
                 <ChatBubbleLeftRightIcon class="w-10 h-10" />
               </div>
               <div class="space-y-4">
-                <h3 class="text-3xl font-black">دردشة سريعة؟</h3>
-                <p class="text-primary-100 text-lg leading-relaxed font-bold"> تواصل معي مباشرة عبر المنصات التالية للرد الفوري.</p>
+                <h3 class="text-3xl font-black">{{ languageStore.locale === 'ar' ? 'دردشة سريعة؟' : 'Need a quick chat?' }}</h3>
+                <p class="text-primary-100 text-lg leading-relaxed font-bold">{{ languageStore.locale === 'ar' ? 'تواصل معي مباشرة عبر المنصات التالية للرد الفوري.' : 'Contact me directly through the platforms below for a quick response.' }}</p>
               </div>
               <div class="flex gap-4">
                  <a href="https://wa.me/967775932431" target="_blank" rel="noopener noreferrer" class="flex-1 bg-white/10 hover:bg-white/20 py-4 rounded-2xl backdrop-blur-xl font-black transition-all border border-white/10 text-center">WhatsApp</a>
@@ -148,9 +150,9 @@ const contactInfo = [
                 <div class="w-24 h-24 bg-green-500 rounded-full flex items-center justify-center text-white mb-8 shadow-2xl shadow-green-500/40 animate-bounce-slow">
                    <CheckBadgeIcon class="w-16 h-16" />
                 </div>
-                <h2 class="text-4xl font-black mb-4">وصلت الرسالة بنجاح!</h2>
-                <p class="text-xl text-slate-500 max-w-md font-bold">شكراً لثقتك. سأقوم بمراجعة طلبك والرد عليك شخصياً خلال 24 ساعة كحد أقصى.</p>
-                <button @click="submitted = false" class="mt-10 px-8 py-3 bg-slate-100 dark:bg-slate-800 rounded-xl font-black hover:bg-primary-600 hover:text-white transition-all">إرسال رسالة أخرى</button>
+                <h2 class="text-4xl font-black mb-4">{{ languageStore.locale === 'ar' ? 'وصلت الرسالة بنجاح!' : 'Message sent successfully!' }}</h2>
+                <p class="text-xl text-slate-500 max-w-md font-bold">{{ languageStore.locale === 'ar' ? 'شكراً لثقتك. سأقوم بمراجعة طلبك والرد عليك شخصياً خلال 24 ساعة كحد أقصى.' : 'Thank you for your trust. I will review your request and reply personally within 24 hours.' }}</p>
+                <button @click="submitted = false" class="mt-10 px-8 py-3 bg-slate-100 dark:bg-slate-800 rounded-xl font-black hover:bg-primary-600 hover:text-white transition-all">{{ languageStore.locale === 'ar' ? 'إرسال رسالة أخرى' : 'Send another message' }}</button>
               </div>
             </Transition>
 
@@ -170,7 +172,7 @@ const contactInfo = [
                     for="name"
                     class="absolute right-6 top-6 text-slate-400 font-black uppercase tracking-widest text-sm transition-all peer-placeholder-shown:top-10 peer-placeholder-shown:text-lg peer-focus:top-6 peer-focus:text-sm peer-focus:text-primary-600 cursor-text"
                   >
-                    الاسم الكامل
+                    {{ languageStore.locale === 'ar' ? 'الاسم الكامل' : 'Full name' }}
                   </label>
                   <UserIcon class="absolute left-6 top-10 w-6 h-6 text-slate-300 group-focus-within:text-primary-500 transition-colors" />
                 </div>
@@ -189,7 +191,7 @@ const contactInfo = [
                     for="email"
                     class="absolute right-6 top-6 text-slate-400 font-black uppercase tracking-widest text-sm transition-all peer-placeholder-shown:top-10 peer-placeholder-shown:text-lg peer-focus:top-6 peer-focus:text-sm peer-focus:text-primary-600 cursor-text"
                   >
-                    البريد الإلكتروني
+                    {{ languageStore.locale === 'ar' ? 'البريد الإلكتروني' : 'Email address' }}
                   </label>
                   <EnvelopeIcon class="absolute left-6 top-10 w-6 h-6 text-slate-300 group-focus-within:text-primary-500 transition-colors" />
                 </div>
@@ -209,7 +211,7 @@ const contactInfo = [
                   for="subject"
                   class="absolute right-6 top-6 text-slate-400 font-black uppercase tracking-widest text-sm transition-all peer-placeholder-shown:top-10 peer-placeholder-shown:text-lg peer-focus:top-6 peer-focus:text-sm peer-focus:text-primary-600 cursor-text"
                 >
-                  الموضوع
+                  {{ languageStore.locale === 'ar' ? 'الموضوع' : 'Subject' }}
                 </label>
               </div>
 
@@ -227,7 +229,7 @@ const contactInfo = [
                   for="message"
                   class="absolute right-6 top-6 text-slate-400 font-black uppercase tracking-widest text-sm transition-all peer-placeholder-shown:top-10 peer-placeholder-shown:text-lg peer-focus:top-6 peer-focus:text-sm peer-focus:text-primary-600 cursor-text"
                 >
-                  رسالتك
+                  {{ languageStore.locale === 'ar' ? 'رسالتك' : 'Your message' }}
                 </label>
               </div>
 
@@ -245,11 +247,11 @@ const contactInfo = [
                          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                        </svg>
-                       <span class="text-xl">جاري المعالجة...</span>
+                       <span class="text-xl">{{ languageStore.locale === 'ar' ? 'جاري المعالجة...' : 'Processing...' }}</span>
                     </div>
                   </template>
                   <template v-else>
-                    <span class="relative text-xl">بدء المحادثة الآن</span>
+                    <span class="relative text-xl">{{ languageStore.locale === 'ar' ? 'بدء المحادثة الآن' : 'Start the conversation' }}</span>
                     <PaperAirplaneIcon class="relative w-6 h-6 group-hover/btn:-translate-x-2 group-hover/btn:-translate-y-2 transition-transform" />
                   </template>
                 </button>

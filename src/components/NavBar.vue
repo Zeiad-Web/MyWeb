@@ -22,7 +22,7 @@ const navigation = [
 
 <template>
   <header class="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
-    <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global" dir="rtl">
+    <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global" :dir="langStore.direction">
       <div class="flex lg:flex-1">
         <RouterLink to="/" class="-m-1.5 p-1.5 flex items-center gap-2 group transition-all duration-300 hover:scale-105">
           <!-- Fantastic SVG Logo -->

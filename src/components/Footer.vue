@@ -6,7 +6,7 @@ const currentYear = new Date().getFullYear()
 </script>
 
 <template>
-  <footer class="relative mt-20 bg-slate-200 dark:bg-slate-950 pt-20 pb-10 overflow-hidden text-right" dir="rtl">
+  <footer class="relative mt-20 bg-slate-200 dark:bg-slate-950 pt-20 pb-10 overflow-hidden text-right" :dir="langStore.direction">
     <!-- Decorative Background Elements -->
     <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-600/5 rounded-full blur-[100px] pointer-events-none"></div>
     <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-600/5 rounded-full blur-[100px] pointer-events-none"></div>
@@ -23,7 +23,7 @@ const currentYear = new Date().getFullYear()
             <span class="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400">زياد العريقي</span>
           </div>
           <p class="text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
-            احول الأفكار إلى واقع رقمي مدهش. متخصص في بناء تجارب مستخدم استثنائية تجمع بين الجمال والأداء العالي.
+            {{ langStore.locale === 'ar' ? 'احول الأفكار إلى واقع رقمي مدهش. متخصص في بناء تجارب مستخدم استثنائية تجمع بين الجمال والأداء العالي.' : 'I turn ideas into remarkable digital experiences, creating user journeys that combine beauty and performance.' }}
           </p>
           <div class="flex gap-4">
             <!-- Social Icons Mini -->
@@ -48,31 +48,31 @@ const currentYear = new Date().getFullYear()
 
         <!-- Sitemap -->
         <div>
-          <h3 class="text-slate-900 dark:text-white font-black text-lg mb-6"> الصفحات</h3>
+          <h3 class="text-slate-900 dark:text-white font-black text-lg mb-6">{{ langStore.locale === 'ar' ? 'الصفحات' : 'Pages' }}</h3>
           <ul class="space-y-4">
-            <li><RouterLink to="/" class="text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center gap-2 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-primary-600"></span>الرئيسية</RouterLink></li>
-            <li><RouterLink to="/services" class="text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center gap-2 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-primary-600"></span>الخدمات</RouterLink></li>
-            <li><RouterLink to="/projects" class="text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center gap-2 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700 hover:bg-primary-600"></span>المشاريع</RouterLink></li>
-            <li><RouterLink to="/about" class="text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center gap-2 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700 hover:bg-primary-600"></span> عني</RouterLink></li>
-            <li><RouterLink to="/contact" class="text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center gap-2 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-700 hover:bg-primary-600"></span>تواصل معي</RouterLink></li>
+            <li><RouterLink to="/" class="text-slate-600 dark:text-slate-400 hover:text-primary-600 transition-colors flex items-center gap-2 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-primary-600"></span>{{ langStore.locale === 'ar' ? 'الرئيسية' : 'Home' }}</RouterLink></li>
+            <li><RouterLink to="/services" class="text-slate-600 dark:text-slate-400 hover:text-primary-600 transition-colors flex items-center gap-2 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-primary-600"></span>{{ langStore.locale === 'ar' ? 'الخدمات' : 'Services' }}</RouterLink></li>
+            <li><RouterLink to="/projects" class="text-slate-600 dark:text-slate-400 hover:text-primary-600 transition-colors flex items-center gap-2 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>{{ langStore.locale === 'ar' ? 'المشاريع' : 'Projects' }}</RouterLink></li>
+            <li><RouterLink to="/about" class="text-slate-600 dark:text-slate-400 hover:text-primary-600 transition-colors flex items-center gap-2 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>{{ langStore.locale === 'ar' ? 'عني' : 'About' }}</RouterLink></li>
+            <li><RouterLink to="/contact" class="text-slate-600 dark:text-slate-400 hover:text-primary-600 transition-colors flex items-center gap-2 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>{{ langStore.locale === 'ar' ? 'تواصل معي' : 'Contact' }}</RouterLink></li>
           </ul>
         </div>
 
         <!-- Services -->
         <div>
-          <h3 class="text-slate-900 dark:text-white font-black text-lg mb-6">خدماتي</h3>
+          <h3 class="text-slate-900 dark:text-white font-black text-lg mb-6">{{ langStore.locale === 'ar' ? 'خدماتي' : 'Services' }}</h3>
           <ul class="space-y-4">
-            <li class="text-slate-600 dark:text-slate-400 font-medium hover:text-primary-600 transition-colors cursor-default">تطوير مواقع الويب المخصصة</li>
-            <li class="text-slate-600 dark:text-slate-400 font-medium hover:text-primary-600 transition-colors cursor-default"> خدمات التجارة الالكترونية</li>
-            <li class="text-slate-600 dark:text-slate-400 font-medium hover:text-primary-600 transition-colors cursor-default">استضافة وإدارة السحابة</li>
-            <li class="text-slate-600 dark:text-slate-400 font-medium hover:text-primary-600 transition-colors cursor-default">تحويل الأفكار لمنتجات رقمية</li>
-            <li class="text-slate-600 dark:text-slate-400 font-medium hover:text-primary-600 transition-colors cursor-default">أنظمة إدارة الأعمال ERP/CRM</li>
+            <li class="text-slate-600 dark:text-slate-400 font-medium hover:text-primary-600 transition-colors cursor-default">{{ langStore.locale === 'ar' ? 'تطوير مواقع الويب المخصصة' : 'Custom web development' }}</li>
+            <li class="text-slate-600 dark:text-slate-400 font-medium hover:text-primary-600 transition-colors cursor-default">{{ langStore.locale === 'ar' ? 'خدمات التجارة الإلكترونية' : 'E-commerce solutions' }}</li>
+            <li class="text-slate-600 dark:text-slate-400 font-medium hover:text-primary-600 transition-colors cursor-default">{{ langStore.locale === 'ar' ? 'استضافة وإدارة السحابة' : 'Cloud hosting and management' }}</li>
+            <li class="text-slate-600 dark:text-slate-400 font-medium hover:text-primary-600 transition-colors cursor-default">{{ langStore.locale === 'ar' ? 'تحويل الأفكار لمنتجات رقمية' : 'Turning ideas into digital products' }}</li>
+            <li class="text-slate-600 dark:text-slate-400 font-medium hover:text-primary-600 transition-colors cursor-default">{{ langStore.locale === 'ar' ? 'أنظمة إدارة الأعمال ERP/CRM' : 'ERP/CRM business systems' }}</li>
           </ul>
         </div>
 
         <!-- Contact Info -->
         <div>
-          <h3 class="text-slate-900 dark:text-white font-black text-lg mb-6">معلومات التواصل</h3>
+          <h3 class="text-slate-900 dark:text-white font-black text-lg mb-6">{{ langStore.locale === 'ar' ? 'معلومات التواصل' : 'Contact information' }}</h3>
           <ul class="space-y-4">
             <li class="flex items-start gap-3 text-slate-600 dark:text-slate-400 font-medium group cursor-pointer hover:text-primary-600 transition-colors">
               <div class="mt-1 bg-primary-100 dark:bg-primary-900/30 p-2 rounded-lg text-primary-600 group-hover:scale-110 transition-transform">
@@ -90,7 +90,7 @@ const currentYear = new Date().getFullYear()
               <div class="mt-1 bg-primary-100 dark:bg-primary-900/30 p-2 rounded-lg text-primary-600 group-hover:scale-110 transition-transform">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
               </div>
-              <span>اليمن، صنعاء</span>
+              <span>{{ langStore.locale === 'ar' ? 'اليمن، صنعاء' : 'Sana’a, Yemen' }}</span>
             </li>
           </ul>
         </div>
@@ -103,7 +103,7 @@ const currentYear = new Date().getFullYear()
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-[1px] bg-gradient-to-r from-transparent via-primary-500 to-transparent shadow-[0_0_10px_2px_rgba(14,165,233,0.3)]"></div>
         
         <p class="text-base md:text-lg font-bold text-slate-500 dark:text-slate-400 flex items-center gap-2">
-          <span>جميع الحقوق محفوظة &copy; {{ currentYear }}</span>
+          <span>{{ langStore.locale === 'ar' ? 'جميع الحقوق محفوظة' : 'All rights reserved' }} &copy; {{ currentYear }}</span>
           <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-indigo-600 font-black hover:scale-105 transition-transform cursor-default">زياد العريقي</span>
         </p>
       </div>

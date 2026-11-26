@@ -7,6 +7,10 @@ import {
   ServerIcon,
   CircleStackIcon
 } from '@heroicons/vue/24/outline'
+import { computed } from 'vue'
+import { useLanguageStore } from '../stores/language'
+
+const languageStore = useLanguageStore()
 
 const skillCategories = [
   {
@@ -41,6 +45,13 @@ const skillCategories = [
     ]
   }
 ]
+
+const localizedSkillCategories = computed(() => skillCategories.map((category, index) => ({
+  ...category,
+  name: languageStore.locale === 'ar'
+    ? category.name
+    : ['Frontend Development', 'Backend Development', 'Tools & Platforms'][index]
+})))
 </script>
 
 <template>
@@ -51,18 +62,18 @@ const skillCategories = [
 
     <div class="max-w-6xl mx-auto space-y-16">
       <header class="text-center space-y-4 reveal" dir="rtl">
-        <h2 class="text-primary-600 font-black tracking-widest uppercase text-sm">مجموعة الأدوات التقنية</h2>
+        <h2 class="text-primary-600 font-black tracking-widest uppercase text-sm">{{ languageStore.locale === 'ar' ? 'مجموعة الأدوات التقنية' : 'Technical toolkit' }}</h2>
         <h1 class="text-4xl md:text-6xl font-black tracking-tight text-slate-900">
-          مهاراتي <span class="text-primary-600">والخبرات</span> التقنية
+          {{ languageStore.locale === 'ar' ? 'مهاراتي' : 'My' }} <span class="text-primary-600">{{ languageStore.locale === 'ar' ? 'والخبرات' : 'skills & technical' }}</span> {{ languageStore.locale === 'ar' ? 'التقنية' : 'experience' }}
         </h1>
         <p class="text-slate-500 max-w-2xl mx-auto text-lg leading-relaxed">
-          أستخدم أحدث التقنيات لبناء تطبيقات ويب قوية، قابلة للتطوير، وذات تجربة مستخدم استثنائية.
+          {{ languageStore.locale === 'ar' ? 'أستخدم أحدث التقنيات لبناء تطبيقات ويب قوية، قابلة للتطوير، وذات تجربة مستخدم استثنائية.' : 'I use modern technologies to build powerful, scalable web applications with exceptional user experiences.' }}
         </p>
       </header>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 reveal" dir="rtl">
         <div 
-          v-for="category in skillCategories" 
+          v-for="category in localizedSkillCategories" 
           :key="category.name" 
           class="glass p-10 rounded-[2.5rem] border border-slate-100 hover:shadow-2xl transition-all duration-500"
         >
@@ -94,7 +105,7 @@ const skillCategories = [
           <div class="w-20 h-20 bg-cyan-500/10 rounded-3xl flex items-center justify-center text-cyan-600">
             <CommandLineIcon class="w-10 h-10" />
           </div>
-          <h3 class="text-2xl font-black">تقنيات أخرى أتقنها</h3>
+          <h3 class="text-2xl font-black">{{ languageStore.locale === 'ar' ? 'تقنيات أخرى أتقنها' : 'Other technologies I use' }}</h3>
           <div class="flex flex-wrap justify-center gap-3">
             <span v-for="tag in ['Electron', 'WebSockets', 'GraphQL', 'Vite', 'Pinia', 'Canva', 'Sass','Build Videos,Images']" :key="tag" class="px-5 py-2.5 bg-slate-100 rounded-full text-sm font-bold text-slate-600 hover:bg-primary-600 hover:text-white transition-colors cursor-default">
               {{ tag }}

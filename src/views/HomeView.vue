@@ -4,21 +4,25 @@ import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { RocketLaunchIcon, SparklesIcon } from '@heroicons/vue/24/outline'
 import { useProjectsStore } from '../stores/projects'
+import { useLanguageStore } from '../stores/language'
 
 const projectsStore = useProjectsStore()
+const languageStore = useLanguageStore()
 
 
-import ziadImage from '/images/img12.jpeg'
+import ziadImage from '/images/img6.png'
 
 const typewriterText = ref('')
-const titles = ["I'm Web Developer", "I'm Full-Stack Developer" , "I'm Freelancer"]
+const titles = computed(() => languageStore.locale === 'ar'
+  ? ['أنا مطور ويب', 'أنا مطور Full-Stack', 'أنا مستقل']
+  : ["I'm Web Developer", "I'm Full-Stack Developer", "I'm Freelancer"])
 let titleIndex = 0
 let charIndex = 0
 let isDeleting = false
 let typingSpeed = 150
 
 const type = () => {
-    const currentTitle = titles[titleIndex]
+    const currentTitle = titles.value[titleIndex]
     
     if (isDeleting) {
         typewriterText.value = currentTitle.substring(0, charIndex - 1)
@@ -55,11 +59,17 @@ const hasVideo = (project) => {
 }
 
 
-const stats = [
-  { label: 'سنوات خبرة', value: '2+' },
-  { label: 'مشروع مكتمل', value: '15+' },
-  { label: 'ساعات عمل', value: '2000+' }
-]
+const stats = computed(() => languageStore.locale === 'ar'
+  ? [
+      { label: 'سنوات خبرة', value: '2+' },
+      { label: 'مشروع مكتمل', value: '15+' },
+      { label: 'ساعات عمل', value: '2000+' }
+    ]
+  : [
+      { label: 'Years of experience', value: '2+' },
+      { label: 'Completed projects', value: '15+' },
+      { label: 'Working hours', value: '2000+' }
+    ])
 
 const socialLinks = [
   {
@@ -114,11 +124,11 @@ const socialLinks = [
         <div class="text-right space-y-8 animate-fade-in">
           <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 font-bold text-sm">
             <SparklesIcon class="w-4 h-4" />
-            <span>متاح للعمل الحر والمشاريع الكبيرة</span>
+            <span>{{ languageStore.locale === 'ar' ? 'متاح للعمل الحر والمشاريع الكبيرة' : 'Available for freelance and large projects' }}</span>
           </div>
           <div class="space-y-2 mb-6">
             <h2 class="text-3xl md:text-4xl font-bold text-primary-500 animate-fade-in" style="animation-delay: 0.1s">
-              مرحباً، أنا
+              {{ languageStore.locale === 'ar' ? 'مرحباً، أنا' : 'Hello, I am' }}
             </h2>
             <h1 class="text-6xl md:text-9xl font-black tracking-tighter text-slate-900 dark:text-white leading-tight animate-fade-in" style="animation-delay: 0.2s">
               زياد العريقي<span class="text-primary-600">.</span>
@@ -131,7 +141,7 @@ const socialLinks = [
             <span class="w-1 h-8 md:h-12 bg-primary-600 animate-blink"></span>
           </h2>
           <p class="text-xl md:text-2xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl">
-            أنا مطور برمجيات شغوف بدمج الكفاءة التقنية مع الإبداع البصري. أتخصص في بناء واجهات تفاعلية متطورة تمتاز بالسرعة الفائقة وسلاسة الأداء، حيث أقوم بتحويل العمليات البرمجية المعقدة إلى تجارب مستخدم بسيطة، ذكية، وذات أثر بصرى جذاب.".
+            {{ languageStore.locale === 'ar' ? 'أنا مطور برمجيات شغوف بدمج الكفاءة التقنية مع الإبداع البصري. أتخصص في بناء واجهات تفاعلية متطورة تمتاز بالسرعة الفائقة وسلاسة الأداء، حيث أقوم بتحويل العمليات البرمجية المعقدة إلى تجارب مستخدم بسيطة وذكية.' : 'I am a passionate software developer who combines technical excellence with visual creativity. I build fast, polished interfaces and turn complex processes into simple, smart user experiences.' }}
           </p>
           <div class="mt-12 flex flex-col xl:flex-row items-center justify-between gap-10 animate-fade-in" style="animation-delay: 0.2s">
             
@@ -142,20 +152,20 @@ const socialLinks = [
                 class="w-full sm:w-auto px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-full font-black text-lg shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2 group order-2 sm:order-1"
               >
                 <RocketLaunchIcon class="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-                <span>استعرض أعمالي</span>
+                <span>{{ languageStore.locale === 'ar' ? 'استعرض أعمالي' : 'View my work' }}</span>
               </RouterLink>
 
               <RouterLink 
                 to="/contact" 
                 class="w-full sm:w-auto px-8 py-4 bg-[#0ea5e9] hover:bg-[#0284c7] text-white rounded-full font-black text-lg shadow-xl shadow-cyan-500/20 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2 order-1 sm:order-2"
               >
-                <span>تواصل معي</span>
+                <span>{{ languageStore.locale === 'ar' ? 'تواصل معي' : 'Contact me' }}</span>
               </RouterLink>
             </div>
 
             <!-- Social Links -->
             <div class="flex flex-col sm:flex-row items-center gap-4 w-full xl:w-auto justify-center xl:justify-end">
-              <span class="text-slate-500 font-bold text-lg hidden xl:block">تابعني:</span>
+              <span class="text-slate-500 font-bold text-lg hidden xl:block">{{ languageStore.locale === 'ar' ? 'تابعني:' : 'Follow me:' }}</span>
               <div class="flex items-center gap-3 flex-wrap justify-center">
                 <a 
                   v-for="social in socialLinks" 
@@ -202,11 +212,11 @@ const socialLinks = [
     <section class="py-24 px-6 max-w-7xl mx-auto overflow-hidden reveal">
       <div class="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
         <div class="space-y-4 text-right">
-          <h2 class="text-4xl font-black tracking-tight">مشاريع <span class="text-primary-600">مختارة بعناية</span></h2>
-          <p class="text-slate-600 dark:text-slate-400 max-w-lg">كل مشروع هو رحلة من التصميم البرمجي والحلول المبتكرة التي تركز على المستخدم النهائي.</p>
+          <h2 class="text-4xl font-black tracking-tight">{{ languageStore.locale === 'ar' ? 'مشاريع' : 'Featured' }} <span class="text-primary-600">{{ languageStore.locale === 'ar' ? 'مختارة بعناية' : 'projects' }}</span></h2>
+          <p class="text-slate-600 dark:text-slate-400 max-w-lg">{{ languageStore.locale === 'ar' ? 'كل مشروع هو رحلة من التصميم البرمجي والحلول المبتكرة التي تركز على المستخدم النهائي.' : 'Every project is a journey of thoughtful engineering and innovative solutions focused on the end user.' }}</p>
         </div>
         <RouterLink to="/projects" class="text-primary-600 font-bold hover:underline flex items-center gap-2">
-           مشاهدة جميع المشاريع
+           {{ languageStore.locale === 'ar' ? 'مشاهدة جميع المشاريع' : 'View all projects' }}
         </RouterLink>
       </div>
 
@@ -232,7 +242,7 @@ const socialLinks = [
                     :to="{ name: 'project-details', params: { slug: project.slug } }"
                     class="block w-full py-3 bg-white text-slate-900 rounded-xl font-black shadow-lg text-center"
                   >
-                    تفاصيل المشروع
+                    {{ languageStore.locale === 'ar' ? 'تفاصيل المشروع' : 'Project details' }}
                   </RouterLink>
                </div>
             </div>

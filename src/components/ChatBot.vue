@@ -1,5 +1,5 @@
 <script setup>
-import { ref, nextTick } from 'vue'
+import { ref, nextTick, watch } from 'vue'
 import { useLanguageStore } from '../stores/language'
 import { getGeminiResponse } from '../utils/gemini'
 const languageStore = useLanguageStore()
@@ -21,6 +21,14 @@ const messages = ref([
 ])
 const inputRef = ref(null)
 const messagesContainer = ref(null)
+
+watch(() => languageStore.locale, (locale) => {
+  if (messages.value.length === 1 && messages.value[0].isBot) {
+    messages.value[0].text = locale === 'ar'
+      ? 'مرحباً! 👋 أنا مساعدك الذكي. اسألني عن البرمجة، تطوير المواقع، المشاريع، أو أي موضوع آخر وسأحاول مساعدتك.'
+      : 'Hello! 👋 I am your smart assistant. Ask me about programming, web development, projects, or any other topic.'
+  }
+})
 
 const toggleChat = () => {
   isOpen.value = !isOpen.value
@@ -222,10 +230,10 @@ const sendMessage = async () => {
                <SparklesIcon class="w-7 h-7 text-yellow-300 animate-pulse" />
              </div>
              <div>
-               <h3 class="font-black text-lg leading-tight">المساعد الذكي</h3>
+               <h3 class="font-black text-lg leading-tight">{{ languageStore.locale === 'ar' ? 'المساعد الذكي' : 'Smart assistant' }}</h3>
                <p class="text-[10px] text-primary-200 font-bold flex items-center gap-1">
                  <span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
-                 متاح للخدمة الآن
+                 {{ languageStore.locale === 'ar' ? 'متاح للخدمة الآن' : 'Available now' }}
                </p>
              </div>
            </div>
@@ -285,7 +293,7 @@ const sendMessage = async () => {
                 ref="inputRef"
                 v-model="messageInput"
                 type="text" 
-                placeholder="اكتب سؤالك هنا..." 
+                :placeholder="languageStore.locale === 'ar' ? 'اكتب سؤالك هنا...' : 'Type your question...'" 
                 class="w-full bg-slate-100 px-6 py-4 rounded-2xl outline-none focus:ring-4 focus:ring-primary-500/20 transition-all font-bold text-sm"
               >
               <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-400">

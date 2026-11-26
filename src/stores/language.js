@@ -3,8 +3,8 @@ import { defineStore } from 'pinia'
 import i18n from '../i18n'
 
 export const useLanguageStore = defineStore('language', () => {
-    const locale = ref(localStorage.getItem('locale') || 'en')
-    const direction = ref('rtl')
+    const locale = ref(localStorage.getItem('locale') || 'ar')
+    const direction = ref(locale.value === 'ar' ? 'rtl' : 'ltr')
 
     const setLanguage = (lang) => {
         locale.value = lang
@@ -18,7 +18,8 @@ export const useLanguageStore = defineStore('language', () => {
         localStorage.setItem('locale', val)
         i18n.global.locale.value = val
         document.documentElement.lang = val
-        document.documentElement.dir = 'rtl'
+        direction.value = val === 'ar' ? 'rtl' : 'ltr'
+        document.documentElement.dir = direction.value
     }, { immediate: true })
 
     return { locale, direction, setLanguage, toggleLanguage }
