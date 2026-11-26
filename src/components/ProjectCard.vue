@@ -16,7 +16,7 @@ const imageUrl = computed(() => props.project.image || 'https://via.placeholder.
 <template>
   <div class="group relative overflow-hidden rounded-2xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
     <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-t-2xl bg-gray-200 lg:aspect-none group-hover:opacity-90 lg:h-56">
-      <img :src="imageUrl" :alt="project.title" class="h-full w-full object-cover object-center lg:h-full lg:w-full transition-transform duration-500 group-hover:scale-110" />
+      <img :src="imageUrl" :alt="project.title" loading="lazy" decoding="async" class="h-full w-full object-cover object-center lg:h-full lg:w-full transition-transform duration-500 group-hover:scale-110" />
     </div>
     <div class="p-6">
       <div class="flex justify-between items-start">

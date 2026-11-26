@@ -8,7 +8,7 @@ import { useProjectsStore } from '../stores/projects'
 const projectsStore = useProjectsStore()
 
 
-import ziadImage from '/images/img6.png'
+import ziadImage from '/images/img12.jpeg'
 
 const typewriterText = ref('')
 const titles = ["I'm Web Developer", "I'm Full-Stack Developer" , "I'm Freelancer"]
@@ -180,7 +180,7 @@ const socialLinks = [
           <div class="relative w-80 h-80 md:w-96 md:h-96">
             <div class="absolute inset-0 bg-primary-500 rounded-3xl rotate-6 opacity-20 blur-2xl"></div>
             <div class="relative z-10 w-full h-full glass rounded-3xl p-3 flex items-center justify-center border-2 border-white/50 overflow-hidden shadow-2xl group">
-               <img :src="ziadImage" alt="Ziad Al-Oraiqi" class="rounded-2xl object-cover w-full h-full transform transition-transform duration-700 group-hover:scale-110">
+               <img :src="ziadImage" alt="Ziad Al-Oraiqi" fetchpriority="high" decoding="async" class="rounded-2xl object-cover w-full h-full transform transition-transform duration-700 group-hover:scale-110">
 
             </div>
           </div>
@@ -225,7 +225,7 @@ const socialLinks = [
                 preload="metadata"
               ></video>
             </template>
-            <img v-else :src="project.image" :alt="project.title" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <img v-else :src="project.image" :alt="project.title" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-8">
                <div class="w-full">
                   <RouterLink 

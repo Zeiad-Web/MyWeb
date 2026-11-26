@@ -1,485 +1,66 @@
 <script setup>
-import { ref } from 'vue'
-import { 
-  CalendarIcon, 
-  ClockIcon, 
-  ChevronRightIcon,
-  CpuChipIcon,
-  GlobeAltIcon,
-  BeakerIcon,
-  XMarkIcon,
-  CheckBadgeIcon,
-  ShareIcon,
-  BookmarkIcon,
-  FireIcon
-} from '@heroicons/vue/24/outline'
+import { computed, onBeforeUnmount, ref } from 'vue'
+import { ArrowLeftIcon, BookmarkIcon, CalendarIcon, CheckCircleIcon, ClockIcon, CodeBracketIcon, CommandLineIcon, CircleStackIcon, MagnifyingGlassIcon, ServerStackIcon, ShareIcon, ShieldCheckIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 
 const selectedPost = ref(null)
-
+const activeCategory = ref('الكل')
+const searchQuery = ref('')
+const categories = ['الكل', 'تطوير الويب', 'JavaScript', 'الذكاء الاصطناعي', 'قواعد البيانات', 'واجهات برمجية', 'الأمان']
 const posts = [
-  {
-    id: 1,
-    title: 'مستقبل الذكاء الاصطناعي في تطوير الويب 2025',
-    excerpt: 'كيف ستغير النماذج اللغوية الكبيرة طريقة كتابتنا للكود وبناء واجهات المستخدم في السنوات القليلة القادمة.',
-    description: `
-      <p class="mb-6 text-lg leading-relaxed">مع دخولنا عام 2025، لم يعد الذكاء الاصطناعي مجرد أداة مساعدة، بل أصبح جزءاً لا يتجزأ من دورة حياة تطوير البرمجيات. من كتابة الأكواد الآلية إلى توليد واجهات المستخدم المعقدة في ثوانٍ، يشهد المجال تحولاً جذرياً.</p>
-      
-      <div class="bg-slate-900 rounded-2xl p-6 mb-8 text-primary-400 font-mono text-sm overflow-x-auto border border-white/10 shadow-2xl" dir="ltr">
-        <code class="block whitespace-pre">// Future of AI Integration
-const component = await AI.generateComponent({
-  description: "Advanced Glassmorphism Dashboard",
-  framework: "Vue3",
-  styling: "TailwindV4"
-});</code>
-      </div>
-
-      <h3 class="text-2xl font-black mb-4 text-slate-900 dark:text-white">1. توليد الأكواد المتقدم</h3>
-      <p class="mb-6 leading-relaxed">النماذج اللغوية مثل GPT-5 و Claude 4 أصبحت قادرة على فهم سياق المشاريع الضخمة، وليس فقط الوظائف الفردية. هذا يعني أن المطورين سيركزون أكثر على المعمارية (Architecture) بدلاً من كتابة الكود السطحي.</p>
-      
-      <h3 class="text-2xl font-black mb-4 text-slate-900 dark:text-white">2. واجهات المستخدم التكيفية</h3>
-      <p class="mb-6 leading-relaxed">سيبدأ الويب في التحول نحو واجهات تتغير بناءً على سلوك المستخدم فورياً باستخدام نماذج ذكاء اصطناعي خفيفة تعمل داخل المتصفح.</p>
-      
-      <div class="bg-primary-50 dark:bg-primary-900/20 border-r-4 border-primary-500 p-6 mb-8 italic text-lg text-slate-700 dark:text-slate-300">
-        "المطور الذي سيقود المستقبل هو من يتقن تطويع هذه الأدوات لصناعة تجارب إنسانية فريدة."
-      </div>
-    `,
-    date: '21 ديسمبر 2024',
-    readTime: '5 دقائق',
-    category: 'الذكاء الاصطناعي',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-    icon: CpuChipIcon,
-    featured: true
-  },
-  {
-    id: 2,
-    title: 'ثورة الحوسبة الكمية: هل نحن مستعدون؟',
-    excerpt: 'استكشاف لآفاق التشفير ومعالجة البيانات في عصر الحاسوب الكمي وتأثيره على أمن المعلومات العالمي.',
-    description: `
-      <p class="mb-6 text-lg leading-relaxed">الحوسبة الكمية ليست مجرد حواسيب أسرع، بل هي طريقة مختلفة تماماً لمعالجة المعلومات تعتمد على "الكيوبتس" بدلاً من البتات التقليدية.</p>
-      
-      <h3 class="text-2xl font-black mb-4 text-slate-900 dark:text-white">التحدي الأمني</h3>
-      <p class="mb-6 leading-relaxed">أكبر قلق يواجه العالم الرقمي اليوم هو قدرة الحواسيب الكمية على كسر أنظمة التشفير الحالية مثل RSA. هذا أدى لظهور ما يعرف بـ "التشفير ما بعد الكم" (Post-Quantum Cryptography).</p>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <div class="glass p-6 rounded-2xl border-primary-500/20">
-          <h4 class="font-black mb-2 text-primary-600">القوة الكمية</h4>
-          <p class="text-sm">معالجة ملايين الاحتمالات في أجزاء من الثانية.</p>
-        </div>
-        <div class="glass p-6 rounded-2xl border-cyan-500/20">
-          <h4 class="font-black mb-2 text-cyan-600">التشفير الجديد</h4>
-          <p class="text-sm">خوارزميات جديدة مضادة للاختراق الكمي.</p>
-        </div>
-      </div>
-    `,
-    date: '15 ديسمبر 2024',
-    readTime: '8 دقائق',
-    category: 'المستقبل',
-    image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    icon: GlobeAltIcon,
-    featured: false
-  },
-  {
-    id: 3,
-    title: 'أفضل تقنيات تطوير الواجهات الأمامية لعام 2025',
-    excerpt: 'لماذا يتصدر Vue 3 و Tailwind v4 المشهد البرمجي، وكيف تختار تقنيات مشروعك القادم بكفاءة.',
-    description: `
-      <p class="mb-6 text-lg leading-relaxed">تطوير الواجهات الأمامية يتجه نحو البساطة والأداء العالي. إليك أهم الأدوات لعام 2025:</p>
-      
-      <ul class="space-y-4 mb-8">
-        <li class="flex items-start gap-4">
-          <div class="w-2 h-2 rounded-full bg-primary-500 mt-2.5"></div>
-          <div>
-            <strong class="text-slate-900 dark:text-white block text-lg">Vue 3 & Vapor Mode</strong>
-            <span class="text-slate-500">التركيز على القضاء على الـ Virtual DOM للحصول على أداء خارق وسرعة تحميل لا تُضاهى.</span>
-          </div>
-        </li>
-        <li class="flex items-start gap-4">
-          <div class="w-2 h-2 rounded-full bg-cyan-500 mt-2.5"></div>
-          <div>
-            <strong class="text-slate-900 dark:text-white block text-lg">Tailwind CSS v4</strong>
-            <span class="text-slate-500">تحولات جذرية في سرعة البناء ودعم الميزات الحديثة للمتصفحات بشكل أصيل.</span>
-          </div>
-        </li>
-      </ul>
-      
-      <p class="leading-relaxed">اختيار التقنية المناسبة يعتمد على نوع المشروع، ولكن البقاء في بيئة Vue يضمن لك التوازن المثالي بين الإنتاجية والأداء.</p>
-    `,
-    date: '10 ديسمبر 2024',
-    readTime: '6 دقائق',
-    category: 'برمجيات',
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    icon: BeakerIcon,
-    featured: false
-  },
-  {
-    id: 4,
-    title: 'الأمن السيبراني في عصر السحابة 2025',
-    excerpt: 'نظرة شاملة على استراتيجيات الحماية المتقدمة وكيفية تأمين البنية التحتية السحابية من التهديدات المتطورة.',
-    description: `
-      <p class="mb-6 text-lg leading-relaxed">مع انتقال معظم البنى التحتية إلى السحابة، أصبح الأمن السيبراني المحور الأساسي لضمان استمرارية الأعمال وحماية البيانات الحساسة.</p>
-      
-      <h3 class="text-2xl font-black mb-4 text-slate-900 dark:text-white">نموذج الثقة الصفرية (Zero Trust)</h3>
-      <p class="mb-6 leading-relaxed">لم يعد كافياً حماية "المحيط"؛ الآن يجب التحقق من كل طلب وصول بغض النظر عن مصدره. الثقة الصفرية هي المعيار الجديد للشركات الكبرى في 2025.</p>
-      
-      <div class="bg-red-50 dark:bg-red-900/20 border-r-4 border-red-500 p-6 mb-8 italic text-lg text-slate-700 dark:text-slate-300">
-        "الأمن ليس مجرد جدار حماية، بل هو ثقافة تبدأ من أصغر كود برمجي."
-      </div>
-    `,
-    date: '5 ديسمبر 2024',
-    readTime: '7 دقائق',
-    category: 'أمان رقمي',
-    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-    icon: CheckBadgeIcon,
-    featured: false
-  },
-  {
-    id: 5,
-    title: 'تصميم UX العاطفي: ما وراء الواجهات',
-    excerpt: 'كيف ننتقل من تصميم واجهات وظيفية إلى بناء تجارب ترتبط عاطفياً بالمستخدمين وتزيد من ولائهم.',
-    description: `
-      <p class="mb-6 text-lg leading-relaxed">التصميم الناجح هو الذي يترك أثراً إيجابياً في مشاعر المستخدم، وليس فقط الذي يؤدي الوظيفة المطلوبة بسرعة.</p>
-      
-      <h3 class="text-2xl font-black mb-4 text-slate-900 dark:text-white">سيكولوجية الألوان والحركة</h3>
-      <p class="mb-6 leading-relaxed">استخدام الانيميشن الدقيق والألوان المدروسة يمكن أن يقلل من توتر المستخدم ويزيد من شعوره بالرضا أثناء استخدام التطبيق.</p>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <div class="glass p-6 rounded-2xl border-indigo-500/20">
-          <h4 class="font-black mb-2 text-indigo-600">التعاطف الرقمي</h4>
-          <p class="text-sm">فهم احتياجات المستخدم النفسية قبل التقنية.</p>
-        </div>
-        <div class="glass p-6 rounded-2xl border-purple-500/20">
-          <h4 class="font-black mb-2 text-purple-600">الولاء للعلامة</h4>
-          <p class="text-sm">بناء علاقة ثقة من خلال تفاصيل التصميم.</p>
-        </div>
-      </div>
-    `,
-    date: '1 ديسمبر 2024',
-    readTime: '6 دقائق',
-    category: 'تصميم',
-    image: 'https://images.unsplash.com/photo-1586717791821-3f44a563eb4c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-    icon: FireIcon,
-    featured: false
-  }
+  { id: 1, featured: true, category: 'تطوير الويب', title: 'كيف تبدأ رحلة احتراف البرمجة من الصفر؟', excerpt: 'خريطة عملية تساعدك على اختيار مسارك، بناء أساس قوي، وإنجاز مشاريع حقيقية تثبت مهاراتك.', date: '18 أغسطس 2026', readTime: '8 دقائق', icon: CodeBracketIcon, image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1400&q=85', description: `<p>تعلم البرمجة رحلة طويلة، لكنها تصبح أوضح عندما تقسمها إلى خطوات صغيرة ومشاريع قابلة للإنجاز.</p><h3>ابدأ بالأساسيات ثم طبّق</h3><p>اختر لغة واحدة في البداية، افهم المتغيرات والدوال وهياكل البيانات، ثم ابنِ مشاريع صغيرة بدل الاكتفاء بمشاهدة الدروس.</p><div class="blog-code"><span class="text-slate-500">// أول برنامج JavaScript</span><br>const message = 'أهلاً بالعالم';<br>console.log(message);</div><p>كل مشروع تنجزه سيكشف لك ما تحتاج إلى تعلمه بعد ذلك، وهذا أفضل من محاولة دراسة كل شيء دفعة واحدة.</p>` },
+  { id: 2, category: 'قواعد البيانات', title: 'أساسيات قواعد البيانات التي يحتاجها كل مبرمج', excerpt: 'افهم الجداول والعلاقات والاستعلامات، واكتشف كيف تختار بين SQL وNoSQL لمشروعك.', date: '12 أغسطس 2026', readTime: '6 دقائق', icon: CircleStackIcon, image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=900&q=85', description: `<p>قواعد البيانات هي المكان الذي يعيش فيه معظم بيانات التطبيق. فهم طريقة تنظيمها ينعكس مباشرة على جودة وأداء مشروعك.</p><h3>صمّم قبل أن تكتب الاستعلام</h3><p>ابدأ بتحديد الكيانات والعلاقات بينها، ثم اختر الفهارس المناسبة وتعلم أساسيات SELECT وJOIN وقيود البيانات.</p><div class="blog-code">SELECT users.name, orders.total<br>FROM users<br>JOIN orders ON orders.user_id = users.id;</div><p>استخدم SQL عندما تكون العلاقات والتقارير مهمة، وفكر في NoSQL عندما تحتاج مرونة كبيرة في شكل البيانات.</p>` },
+  { id: 3, category: 'واجهات برمجية', title: 'إنشاء REST API منظمة وقابلة للتوسع', excerpt: 'قواعد بسيطة لبناء واجهات برمجية واضحة، آمنة، وسهلة الربط مع تطبيقات الويب والجوال.', date: '05 أغسطس 2026', readTime: '7 دقائق', icon: ServerStackIcon, image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=85', description: `<p>الـ API الجيدة تجعل التواصل بين الواجهة والخادم واضحاً ومتوقعاً لكل من سيستخدمها.</p><h3>اهتم بالتسمية والاستجابات</h3><p>استخدم مسارات مفهومة، رموز HTTP صحيحة، واستجابات موحّدة للأخطاء والبيانات. أضف التوثيق منذ البداية حتى لا يصبح عبئاً لاحقاً.</p><div class="blog-code">GET /api/posts<br>POST /api/posts<br>DELETE /api/posts/{id}</div><p>قسّم الإصدارات عند الحاجة، واكتب اختبارات للعمليات المهمة قبل نشر الـ API.</p>` },
+  { id: 4, category: 'الأمان', title: 'قائمة فحص أمان لأي تطبيق ويب', excerpt: 'خطوات أساسية لحماية بيانات المستخدمين وتقليل الثغرات الشائعة في تطبيقات الويب.', date: '28 يوليو 2026', readTime: '5 دقائق', icon: ShieldCheckIcon, image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=900&q=85', description: `<p>الأمان مسؤولية مستمرة تبدأ من تصميم التطبيق ولا تنتهي عند إطلاقه.</p><h3>لا تثق بأي مدخلات</h3><p>تحقق من مدخلات المستخدم، استخدم HTTPS، خزّن الأسرار في متغيرات البيئة، وطبّق أقل صلاحية ممكنة لكل حساب وخدمة.</p><div class="blog-callout">نصيحة: حدّث مكتبات مشروعك باستمرار، وراجع سجلات الدخول والأخطاء بشكل دوري.</div>` },
+  { id: 5, category: 'JavaScript', title: 'أهم مفاهيم JavaScript الحديثة باختصار', excerpt: 'تعرّف على async/await وdestructuring وmodules لتكتب كوداً أوضح وأكثر مرونة.', date: '20 يوليو 2026', readTime: '4 دقائق', icon: CommandLineIcon, image: 'https://images.unsplash.com/photo-1627398242454-45a1465c2479?auto=format&fit=crop&w=900&q=85', description: `<p>JavaScript الحديثة تحتوي على أدوات تجعل كتابة التطبيقات الكبيرة أسهل وأكثر وضوحاً.</p><h3>اكتب كوداً قابلاً للقراءة</h3><p>استخدم const وlet، قسّم الكود إلى modules، واستعمل async/await للتعامل مع العمليات غير المتزامنة بدون تداخل مزعج.</p><div class="blog-code">const response = await fetch('/api/posts');<br>const posts = await response.json();</div><p>لا تنسَ التعامل مع حالات التحميل والأخطاء، فهي جزء أساسي من تجربة المستخدم.</p>` },
+  { id: 6, category: 'تطوير الويب', title: 'الفرق بين Frontend وBackend للمبتدئين', excerpt: 'شرح مبسط لدور كل جانب وكيف يتعاونان لبناء تطبيق ويب متكامل.', date: '14 يوليو 2026', readTime: '5 دقائق', icon: CodeBracketIcon, image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=85', description: `<p>الـ Frontend هو الجزء الذي يراه المستخدم ويتفاعل معه، بينما يهتم الـ Backend بالمنطق والبيانات والخدمات خلف الكواليس.</p><h3>التعاون يصنع المنتج</h3><p>يتواصل الجانبان عادة عبر API. فهم أساسيات الطرف الآخر يساعدك على بناء حلول أسرع والتعاون بشكل أفضل مع فريقك.</p>` },
+  { id: 7, category: 'JavaScript', title: 'لماذا Git مهارة أساسية لكل مبرمج؟', excerpt: 'تعلم كيف تحفظ تاريخ مشروعك، تتعاون مع الفريق، وتعود لأي نسخة بأمان.', date: '08 يوليو 2026', readTime: '4 دقائق', icon: CommandLineIcon, image: 'https://images.unsplash.com/photo-1556075798-4825dfaaf498?auto=format&fit=crop&w=900&q=85', description: `<p>Git ليس مجرد أداة لحفظ الكود، بل طريقة منظمة للتعاون وتتبع التغييرات.</p><div class="blog-code">git init<br>git add .<br>git commit -m "first commit"<br>git switch -c feature/login</div><p>قسّم عملك إلى commits صغيرة برسائل واضحة، وستصبح مراجعة الكود وحل المشاكل أسهل بكثير.</p>` },
+  { id: 8, category: 'تطوير الويب', title: 'تحسين سرعة الموقع: خطوات عملية', excerpt: 'أفكار بسيطة لتقليل وقت التحميل وتحسين تجربة المستخدم على الجوال والكمبيوتر.', date: '01 يوليو 2026', readTime: '6 دقائق', icon: ServerStackIcon, image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=900&q=85', description: `<p>سرعة الموقع تؤثر على تجربة المستخدم والانطباع الأول. ابدأ بقياس الأداء قبل إجراء أي تحسين.</p><h3>تحسينات سريعة</h3><p>اضغط الصور، قلل JavaScript غير الضروري، فعّل التخزين المؤقت، واستخدم التحميل الكسول للمحتوى الموجود أسفل الصفحة.</p>` },
+  { id: 9, category: 'JavaScript', title: 'شرح مبسط للبرمجة الكائنية OOP', excerpt: 'افهم الكلاسات والكائنات والوراثة، ومتى تستخدم البرمجة الكائنية في مشاريعك.', date: '25 يونيو 2026', readTime: '7 دقائق', icon: CodeBracketIcon, image: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&w=900&q=85', description: `<p>البرمجة الكائنية طريقة لتنظيم الكود حول كائنات تجمع البيانات والوظائف المرتبطة بها.</p><h3>قسّم المسؤوليات</h3><p>استخدم الكلاسات عندما تحتاج إلى تمثيل أشياء واضحة داخل النظام، واجعل كل كلاس مسؤولاً عن مهمة محددة حتى يبقى الكود قابلاً للتطوير.</p><div class="blog-code">class User {<br>&nbsp;&nbsp;constructor(name) { this.name = name; }<br>&nbsp;&nbsp;greet() { return \`مرحباً ${'${this.name}'}\`; }<br>}</div>` },
+  { id: 10, category: 'تطوير الويب', title: 'كيف تختار إطار العمل المناسب لمشروعك؟', excerpt: 'مقارنة عملية تساعدك على اختيار التقنية المناسبة بين Vue وReact وLaravel حسب احتياج المشروع.', date: '18 يونيو 2026', readTime: '6 دقائق', icon: ServerStackIcon, image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=900&q=85', description: `<p>لا يوجد إطار عمل واحد مناسب لكل المشاريع. القرار الأفضل يعتمد على حجم الفريق، نوع المنتج، والوقت المتاح.</p><h3>اسأل الأسئلة الصحيحة</h3><p>هل تحتاج واجهة تفاعلية؟ هل يوجد Backend جاهز؟ ما خبرة الفريق؟ ابدأ بهذه الأسئلة ثم قارن الأداء وسهولة الصيانة والمجتمع الداعم.</p>` },
+  { id: 11, category: 'قواعد البيانات', title: 'الفهارس Indexes وكيف تحسن أداء الاستعلامات', excerpt: 'تعرف على دور الفهارس في تسريع البحث داخل الجداول ومتى يمكن أن تضر بالأداء.', date: '10 يونيو 2026', readTime: '5 دقائق', icon: CircleStackIcon, image: 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=900&q=85', description: `<p>الفهرس يساعد قاعدة البيانات على الوصول إلى الصفوف المطلوبة بسرعة، مثل فهرس الكتاب الذي يختصر وقت البحث.</p><h3>استخدمه بذكاء</h3><p>ضع الفهارس على الأعمدة المستخدمة كثيراً في البحث والربط، وتذكر أن كثرة الفهارس تزيد وقت عمليات الإضافة والتحديث.</p><div class="blog-code">CREATE INDEX users_email_index<br>ON users(email);</div>` },
+  { id: 12, category: 'واجهات برمجية', title: 'التعامل مع أخطاء API بطريقة احترافية', excerpt: 'اجعل رسائل الخطأ مفيدة ومتناسقة حتى تعرف الواجهة كيف تتصرف في كل حالة.', date: '02 يونيو 2026', readTime: '5 دقائق', icon: ShieldCheckIcon, image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=900&q=85', description: `<p>الخطأ جزء طبيعي من أي تطبيق. المشكلة ليست في حدوثه، بل في عدم شرحه للمستخدم أو للمطور بطريقة واضحة.</p><h3>وحّد شكل الاستجابة</h3><p>أعد status code مناسباً ورسالة مفهومة ورمزاً ثابتاً للخطأ. لا تعرض تفاصيل حساسة، وسجّل التفاصيل الكاملة في الخادم للمراجعة.</p><div class="blog-code">{<br>&nbsp;&nbsp;"message": "البيانات غير صحيحة",<br>&nbsp;&nbsp;"errors": { "email": ["البريد مطلوب"] }<br>}</div>` },
+  { id: 13, category: 'JavaScript', title: 'ما هو TypeScript ولماذا يستخدمه المطورون؟', excerpt: 'تعرف على فائدة الأنواع TypeScript وكيف تساعدك على اكتشاف الأخطاء قبل تشغيل التطبيق.', date: '26 مايو 2026', readTime: '6 دقائق', icon: CodeBracketIcon, image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=900&q=85', description: `<p>TypeScript تضيف نظام أنواع إلى JavaScript، وهذا يجعل المشاريع الكبيرة أكثر وضوحاً وأسهل في الصيانة.</p><h3>اكتشف الأخطاء مبكراً</h3><p>عندما تحدد شكل البيانات، يستطيع المحرر تنبيهك إلى الأخطاء أثناء كتابة الكود بدلاً من اكتشافها بعد وصولها للمستخدم.</p><div class="blog-code">function greet(name: string): string {<br>&nbsp;&nbsp;return \`مرحباً ${'${name}'}\`;<br>}</div>` },
+  { id: 14, category: 'الأمان', title: 'المصادقة والصلاحيات: ما الفرق بينهما؟', excerpt: 'شرح الفرق بين معرفة هوية المستخدم وتحديد الأشياء التي يسمح له بتنفيذها.', date: '19 مايو 2026', readTime: '4 دقائق', icon: ShieldCheckIcon, image: 'https://images.unsplash.com/photo-1633265486064-086b219458ec?auto=format&fit=crop&w=900&q=85', description: `<p>المصادقة تجيب عن سؤال: من أنت؟ أما الصلاحيات فتجيب عن سؤال: ماذا يمكنك أن تفعل؟</p><h3>افصل بين المفهومين</h3><p>بعد تسجيل دخول المستخدم، طبّق Policies أو Roles لتحديد ما يمكنه الوصول إليه. هذا الفصل يجعل النظام أكثر أماناً وأسهل في التوسع.</p>` },
+  { id: 15, category: 'الذكاء الاصطناعي', title: 'كيف يغيّر الذكاء الاصطناعي طريقة كتابة الكود؟', excerpt: 'من مساعد ذكي داخل المحرر إلى مراجعة الكود وتوليد الاختبارات: كيف تستفيد من AI بدون أن تفقد فهمك.', date: '12 مايو 2026', readTime: '8 دقائق', icon: CodeBracketIcon, image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=900&q=85', description: `<p>الذكاء الاصطناعي لا يلغي دور المبرمج، لكنه يمنحه مساحة أكبر للتفكير في الحلول وتجربة الأفكار بسرعة.</p><h3>استخدمه كشريك لا كبديل</h3><p>اطلب منه اقتراح حلول متعددة، شرح كود غير واضح، أو إنشاء حالات اختبار. ثم راجع النتيجة بنفسك وافهم كل سطر قبل اعتماده.</p><div class="blog-callout">قاعدة ذهبية: الكود الذي لا تستطيع شرحه، لا ينبغي أن تضعه في مشروعك.</div>` },
+  { id: 16, category: 'تطوير الويب', title: 'Clean Code: اكتب كودًا يفهمه فريقك', excerpt: 'مبادئ عملية لتقليل التعقيد، تسمية المتغيرات بوضوح، وبناء ملفات سهلة القراءة والصيانة.', date: '05 مايو 2026', readTime: '7 دقائق', icon: CodeBracketIcon, image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=900&q=85', description: `<p>الكود الاحترافي لا يُقاس بعدد الأسطر، بل بمدى سهولة فهمه وتعديله بعد أشهر من كتابته.</p><h3>اجعل الكود يشرح نفسه</h3><p>اختر أسماء واضحة، اجعل الدوال قصيرة وذات مسؤولية واحدة، وتجنب التكرار. التعليقات مفيدة عندما تشرح السبب، لا عندما تعيد وصف ما يفعله الكود.</p><div class="blog-code">// واضح ومباشر<br>const isEligibleForDiscount = user.total &gt; 100;</div>` },
+  { id: 17, category: 'تطوير الويب', title: 'Docker للمطورين: بيئة واحدة للجميع', excerpt: 'لماذا تختفي مشكلة «يعمل عندي» عندما تستخدم الحاويات لتوحيد بيئة التطوير والنشر.', date: '28 أبريل 2026', readTime: '6 دقائق', icon: ServerStackIcon, image: 'https://images.unsplash.com/photo-1605745341112-85968b19335b?auto=format&fit=crop&w=900&q=85', description: `<p>Docker يضع التطبيق واعتماداته داخل حاوية معزولة، مما يجعل تشغيله متقارباً على جهاز المطور والخادم.</p><h3>ابدأ بحاوية بسيطة</h3><p>حدد صورة التشغيل، انسخ ملفات المشروع، وثبّت الاعتماديات داخل Dockerfile. بعدها يستطيع أي عضو في الفريق تشغيل نفس البيئة بأمر واحد.</p><div class="blog-code">docker build -t my-app .<br>docker run -p 3000:3000 my-app</div>` },
+  { id: 18, category: 'واجهات برمجية', title: 'اختبارات البرمجيات: ثقة قبل الإطلاق', excerpt: 'كيف تمنع الأخطاء المتكررة باستخدام Unit Tests وIntegration Tests وخطة اختبار ذكية.', date: '20 أبريل 2026', readTime: '7 دقائق', icon: CheckCircleIcon, image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=85', description: `<p>الاختبارات ليست تباطؤاً في العمل؛ إنها شبكة أمان تسمح لك بتطوير المشروع بثقة أكبر.</p><h3>اختبر السلوك المهم</h3><p>ابدأ بالوظائف الأساسية، اختبر الحالات الطبيعية والاستثنائية، واجعل كل اختبار مستقلاً وسهل القراءة. لا تكتب اختباراً لمجرد زيادة الرقم.</p><div class="blog-code">it('creates a new post', async () =&gt; {<br>&nbsp;&nbsp;expect(response.status).toBe(201);<br>});</div>` },
+  { id: 19, category: 'تطوير الويب', title: 'الوصول الرقمي: موقع للجميع', excerpt: 'تفاصيل صغيرة تجعل موقعك قابلًا للاستخدام من أصحاب الإعاقات وعلى مختلف الأجهزة.', date: '13 أبريل 2026', readTime: '5 دقائق', icon: ShieldCheckIcon, image: 'https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=900&q=85', description: `<p>الوصول الرقمي ليس ميزة إضافية، بل جزء من جودة المنتج واحترام كل المستخدمين.</p><h3>ابدأ من الأساسيات</h3><p>استخدم HTML الدلالي، أضف نصوصاً بديلة للصور، حافظ على تباين الألوان، واجعل كل وظائف الموقع قابلة للاستخدام بلوحة المفاتيح.</p><div class="blog-callout">اختبر موقعك بدون فأرة أحياناً؛ ستكتشف مشاكل لا تظهر في الاستخدام العادي.</div>` },
+  { id: 20, category: 'قواعد البيانات', title: 'هندسة الأنظمة: كيف تبني تطبيقًا يتحمل النمو؟', excerpt: 'فكر في التخزين المؤقت والطوابير والتقسيم قبل أن يتحول نجاح مشروعك إلى مشكلة أداء.', date: '06 أبريل 2026', readTime: '9 دقائق', icon: CircleStackIcon, image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=85', description: `<p>التطبيق الصغير لا يحتاج إلى تعقيد مبكر، لكنه يحتاج إلى قرارات صحيحة تسمح له بالنمو عندما يزيد عدد المستخدمين.</p><h3>صمّم للتدرج</h3><p>راقب نقاط الاختناق، استخدم Cache للبيانات المتكررة، انقل المهام الثقيلة إلى Queue، وافصل الخدمات فقط عندما تظهر حاجة حقيقية.</p><div class="blog-code">Request → Cache → Database<br>                  ↘ Queue → Worker</div>` },
+  { id: 21, category: 'JavaScript', title: 'PWA: عندما يصبح الموقع تطبيقًا', excerpt: 'حوّل تجربة الويب إلى تجربة قريبة من التطبيقات عبر العمل دون اتصال والإشعارات والتثبيت.', date: '30 مارس 2026', readTime: '6 دقائق', icon: CommandLineIcon, image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=900&q=85', description: `<p>تطبيقات الويب التقدمية تمنح المستخدم تجربة سريعة وقابلة للتثبيت بدون الحاجة إلى متجر تطبيقات.</p><h3>التجربة تبدأ بالسرعة</h3><p>أضف Web App Manifest، استخدم Service Worker للتخزين المؤقت، وصمّم حالات واضحة عندما يكون المستخدم غير متصل.</p><div class="blog-code">if ('serviceWorker' in navigator) {<br>&nbsp;&nbsp;navigator.serviceWorker.register('/sw.js');<br>}</div>` },
 ]
-
-const openPost = (post) => {
-  selectedPost.value = post
-  document.body.style.overflow = 'hidden'
-}
-
-const closePost = () => {
-  selectedPost.value = null
-  document.body.style.overflow = 'auto'
-}
+const filteredPosts = computed(() => posts.filter((post) => { const matchesCategory = activeCategory.value === 'الكل' || post.category === activeCategory.value; const query = searchQuery.value.trim().toLowerCase(); return matchesCategory && (!query || `${post.title} ${post.excerpt}`.toLowerCase().includes(query)) }))
+const featuredPost = computed(() => filteredPosts.value.find((post) => post.featured) || filteredPosts.value[0])
+const regularPosts = computed(() => filteredPosts.value.filter((post) => post.id !== featuredPost.value?.id))
+const openPost = (post) => { selectedPost.value = post; document.body.style.overflow = 'hidden' }
+const closePost = () => { selectedPost.value = null; document.body.style.overflow = '' }
+onBeforeUnmount(() => { document.body.style.overflow = '' })
 </script>
 
 <template>
-  <div class="relative min-h-screen pt-32 pb-24 px-6 overflow-hidden bg-slate-50 dark:bg-[#020617] transition-colors duration-500">
-    <!-- Luxury Background Decorations -->
-    <div class="absolute -top-40 -right-40 w-[800px] h-[800px] bg-primary-400/30 dark:bg-primary-600/20 blur-[120px] rounded-full mix-blend-multiply dark:mix-blend-screen animate-pulse-slow pointer-events-none"></div>
-    <div class="absolute top-[20%] -left-40 w-[600px] h-[600px] bg-cyan-400/30 dark:bg-cyan-600/20 blur-[100px] rounded-full mix-blend-multiply dark:mix-blend-screen animate-pulse-slow-reverse pointer-events-none"></div>
-    <div class="absolute bottom-0 right-[20%] w-[800px] h-[800px] bg-indigo-400/30 dark:bg-indigo-600/20 blur-[150px] rounded-full mix-blend-multiply dark:mix-blend-screen pointer-events-none"></div>
-    
-    <!-- SVG Pattern Background Overlay -->
-    <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none -z-10 overflow-hidden">
-      <svg width="100%" height="100%">
-        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="1"/>
-        </pattern>
-        <rect width="100%" height="100%" fill="url(#grid)" />
-      </svg>
-    </div>
-
-    <div class="max-w-7xl mx-auto space-y-24">
-      <header class="text-center space-y-8 reveal" dir="rtl">
-        <div class="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl border border-primary-500/20 text-primary-600 dark:text-primary-400 font-black text-sm tracking-widest uppercase shadow-2xl">
-          <FireIcon class="w-5 h-5 animate-bounce" />
-          <span>أفكار تشكل المستقبل</span>
-        </div>
-        <h1 class="text-5xl md:text-9xl font-black tracking-tight text-slate-900 dark:text-white leading-[0.9]">
-          مدونة <br> <span class="bg-gradient-to-r from-primary-600 via-indigo-600 to-cyan-500 bg-clip-text text-transparent italic">النخبة.</span>
-        </h1>
-        <p class="text-slate-500 max-w-3xl mx-auto text-xl md:text-2xl leading-relaxed font-medium capitalize">
-          مساحة مخصصة لاستكشاف الحدود القصوى للتكنولوجيا والبرمجة.
-        </p>
+  <main class="blog-page min-h-screen px-6 pb-24 pt-32" dir="rtl">
+    <div class="blog-orb blog-orb-one"></div><div class="blog-orb blog-orb-two"></div>
+    <div class="relative mx-auto max-w-7xl">
+      <header class="blog-hero mb-16 grid items-end gap-10 lg:grid-cols-[1fr_auto]">
+        <div><div class="mb-6 inline-flex items-center gap-3 rounded-full border border-[#ff2d20]/20 bg-[#ff2d20]/5 px-4 py-2 text-sm font-bold text-[#d9271c] dark:text-[#ff6b63]"><span class="laravel-mark">&lt;/&gt;</span> مدونة البرمجة</div><h1 class="max-w-4xl text-5xl font-black leading-[1.05] tracking-tight text-slate-950 dark:text-white md:text-8xl">تعلّم أكثر.<br><span class="text-[#ff2d20]">ابنِ أفضل.</span></h1><p class="mt-7 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400 md:text-xl">مقالات عملية عن البرمجة وتطوير الويب تساعدك على كتابة كود أوضح وبناء مشاريع أقوى.</p></div>
+        <div class="stats-card rounded-3xl p-6 text-center"><p class="text-4xl font-black text-[#ff2d20]">{{ posts.length }}+</p><p class="mt-1 text-sm font-bold text-slate-500">مقالات برمجية متنوعة</p></div>
       </header>
-
-      <!-- Elite Magazine Grid Layout -->
-      <div class="space-y-12" dir="rtl">
-        <!-- Featured Post - Immersive Cinematic Layout -->
-        <article 
-          v-for="post in posts.filter(p => p.featured)" 
-          :key="post.id"
-          @click="openPost(post)"
-          class="group cursor-pointer relative rounded-[3rem] overflow-hidden hover:shadow-[0_40px_100px_-20px_rgba(37,99,235,0.5)] transition-all duration-700 reveal hover:scale-[1.01] aspect-auto md:aspect-[21/9] min-h-[600px] border border-white/20 dark:border-white/10"
-        >
-          <img :src="post.image" :alt="post.title" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 group-hover:-rotate-1 transition-transform duration-1000">
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-700"></div>
-          
-          <!-- Abstract Glows Inside Card -->
-          <div class="absolute bottom-0 right-0 w-96 h-96 bg-primary-600/40 blur-[100px] translate-x-1/2 translate-y-1/2 pointer-events-none"></div>
-          <div class="absolute top-0 left-0 w-96 h-96 bg-cyan-600/30 blur-[100px] -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
-
-          <div class="absolute inset-0 p-8 md:p-16 flex flex-col justify-end z-10 w-full md:w-[80%] lg:w-[65%]">
-             <div class="inline-flex items-center gap-4 mb-6">
-                <span class="bg-gradient-to-r from-primary-600 to-cyan-500 text-white px-6 py-2 rounded-full text-xs font-black tracking-widest shadow-xl shadow-primary-600/30 border border-white/20">مقال مميز</span>
-                <span class="text-white font-black text-xs uppercase tracking-widest bg-white/20 dark:bg-slate-800/50 px-4 py-2 rounded-full backdrop-blur-md border border-white/10">{{ post.category }}</span>
-             </div>
-             <h2 class="text-4xl md:text-6xl font-black leading-tight text-white mb-6 group-hover:text-primary-400 transition-colors drop-shadow-2xl">
-               {{ post.title }}
-             </h2>
-             <p class="text-xl text-slate-200 leading-relaxed font-bold mb-8 line-clamp-2 pr-6 border-r-4 border-primary-500 drop-shadow-lg">
-               {{ post.excerpt }}
-             </p>
-             <div class="flex flex-wrap items-center gap-6 text-sm font-black text-white/90">
-                <div class="flex items-center gap-2 bg-white/10 dark:bg-slate-900/40 border border-white/10 px-5 py-3 rounded-2xl backdrop-blur-md shadow-lg group-hover:bg-primary-600/20 transition-colors">
-                   <ClockIcon class="w-5 h-5 text-primary-400" />
-                   <span>{{ post.readTime }} قراءة</span>
-                </div>
-                <div class="flex items-center gap-2 bg-white/10 dark:bg-slate-900/40 border border-white/10 px-5 py-3 rounded-2xl backdrop-blur-md shadow-lg group-hover:bg-cyan-600/20 transition-colors">
-                   <CalendarIcon class="w-5 h-5 text-cyan-400" />
-                   <span>{{ post.date }}</span>
-                </div>
-             </div>
-          </div>
-        </article>
-
-        <!-- Secondary Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <article 
-            v-for="post in posts.filter(p => !p.featured)" 
-            :key="post.id"
-            @click="openPost(post)"
-            class="group cursor-pointer glass-card rounded-[3rem] p-4 border border-white/50 dark:border-white/10 hover:-translate-y-4 hover:scale-[1.02] transition-all duration-700 hover:shadow-[0_40px_80px_-20px_rgba(37,99,235,0.25)] reveal shadow-2xl relative overflow-hidden"
-          >
-            <!-- Hover Glow -->
-            <div class="absolute inset-0 bg-gradient-to-br from-primary-500/0 via-transparent to-cyan-500/0 group-hover:from-primary-500/10 group-hover:to-cyan-500/10 transition-all duration-700 z-0 pointer-events-none"></div>
-
-            <div class="aspect-video relative rounded-[2.5rem] overflow-hidden mb-8 shadow-lg z-10 border border-white/20">
-              <img :src="post.image" :alt="post.title" class="w-full h-full object-cover group-hover:scale-110 group-hover:rotate-1 transition-all duration-1000">
-              <div class="absolute top-6 left-6 flex gap-2">
-                 <button class="bg-white/70 dark:bg-slate-900/70 p-3 rounded-xl backdrop-blur-xl shadow-xl hover:text-primary-600 transition-colors border border-white/40 dark:border-white/10 hover:scale-110">
-                    <BookmarkIcon class="w-5 h-5" />
-                 </button>
-                 <button class="bg-white/70 dark:bg-slate-900/70 p-3 rounded-xl backdrop-blur-xl shadow-xl hover:text-primary-600 transition-colors border border-white/40 dark:border-white/10 hover:scale-110">
-                    <ShareIcon class="w-5 h-5" />
-                 </button>
-              </div>
-            </div>
-            
-            <div class="px-6 pb-6 space-y-6 relative z-10">
-              <div class="flex justify-between items-center text-xs font-black tracking-widest">
-                 <span class="bg-gradient-to-r from-primary-600 to-indigo-500 text-transparent bg-clip-text uppercase bg-white/50 dark:bg-slate-800/50 px-3 py-1.5 rounded-lg border border-white/30 dark:border-slate-700/50 shadow-sm">{{ post.category }}</span>
-                 <span class="text-slate-400 font-bold bg-slate-100/50 dark:bg-slate-800/50 px-3 py-1.5 rounded-lg">{{ post.date }}</span>
-              </div>
-              <h3 class="text-3xl font-black leading-tight text-slate-800 dark:text-white group-hover:text-primary-600 transition-colors">
-                {{ post.title }}
-              </h3>
-              <p class="text-slate-600 dark:text-slate-400 leading-relaxed font-bold line-clamp-2">
-                {{ post.excerpt }}
-              </p>
-              <div class="flex items-center gap-3 text-primary-600 font-black bg-primary-50 dark:bg-primary-900/20 w-fit px-4 py-2 rounded-xl group-hover:bg-primary-600 group-hover:text-white transition-colors duration-500">
-                <ClockIcon class="w-5 h-5" />
-                <span>{{ post.readTime }} قراءة</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-
-      <!-- High-End Circular Newsletter -->
-      <section class="relative reveal" dir="rtl">
-        <div class="absolute inset-x-0 -top-12 h-px bg-gradient-to-r from-transparent via-primary-500/50 to-transparent"></div>
-        <div class="relative overflow-hidden rounded-[4rem] bg-slate-900 dark:bg-black p-12 md:p-24 shadow-[0_50px_100px_-15px_rgba(0,0,0,0.4)]">
-           <!-- Animated Orbs -->
-           <div class="absolute top-0 right-0 w-96 h-96 bg-primary-600/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
-           <div class="absolute bottom-0 left-0 w-96 h-96 bg-cyan-600/10 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"></div>
-           
-           <div class="relative z-10 grid lg:grid-cols-2 gap-20 items-center">
-              <div class="space-y-10">
-                 <div class="w-24 h-24 bg-gradient-to-br from-primary-600 to-indigo-700 rounded-3xl flex items-center justify-center shadow-2xl relative">
-                    <div class="absolute inset-0 bg-white/20 rounded-3xl animate-ping opacity-20"></div>
-                    <CpuChipIcon class="w-12 h-12 text-white" />
-                 </div>
-                 <h2 class="text-5xl md:text-7xl font-black text-white leading-tight">
-                    كن جزءاً من <br> <span class="text-primary-500 underline decoration-indigo-500 decoration-8 underline-offset-[12px]">مجتمعنا</span> التقني.
-                 </h2>
-                 <p class="text-slate-400 text-xl md:text-2xl leading-relaxed max-w-xl font-medium">
-                    انضم إلى قائمة النخبة من المطورين والمبدعين واستلم أسبوعياً زبدة الأفكار والتقنيات مباشرة في بريدك.
-                 </p>
-                 <div class="flex flex-wrap gap-8 text-slate-300 font-black">
-                    <div class="flex items-center gap-3">
-                       <CheckBadgeIcon class="w-6 h-6 text-green-400" />
-                       <span>مقالات حصرية</span>
-                    </div>
-                    <div class="flex items-center gap-3">
-                       <CheckBadgeIcon class="w-6 h-6 text-green-400" />
-                       <span>أدوات مجانية</span>
-                    </div>
-                 </div>
-              </div>
-
-              <div class="glass bg-white/5 border-white/10 p-10 md:p-14 rounded-[3.5rem] space-y-10">
-                 <div class="space-y-2">
-                    <h3 class="text-3xl font-black text-white">ابدأ رحلتك اليوم</h3>
-                    <p class="text-slate-500">سوف تنضم إلى أكثر من 5,000 مشترك.</p>
-                 </div>
-                 <div class="space-y-5">
-                    <input 
-                      type="email" 
-                      placeholder="بريدك الإلكتروني البروجيني" 
-                      class="w-full bg-slate-950 border-b-2 border-white/10 px-8 py-6 rounded-2xl outline-none focus:border-primary-500 transition-all text-white text-xl font-bold placeholder:text-slate-700"
-                    >
-                    <button class="w-full bg-white text-slate-900 hover:bg-primary-600 hover:text-white font-black py-7 rounded-2xl transition-all shadow-2xl text-xl hover:scale-[1.02] transform active:scale-95">
-                       تأكيد الاشتراك
-                    </button>
-                 </div>
-                 <p class="text-center text-slate-600 text-sm font-bold">لا تقلق، نحن نكره البريد المزعج بقدر ما تفعل.</p>
-              </div>
-           </div>
-        </div>
-      </section>
+      <section class="mb-12 flex flex-col gap-5 border-y border-slate-200 py-5 dark:border-white/10 lg:flex-row lg:items-center lg:justify-between"><div class="flex flex-wrap gap-2"><button v-for="category in categories" :key="category" @click="activeCategory = category" class="category-pill" :class="{ active: activeCategory === category }">{{ category }}</button></div><label class="search-box flex items-center gap-3 rounded-xl px-4 py-3 text-slate-400"><MagnifyingGlassIcon class="h-5 w-5" /><input v-model="searchQuery" type="search" placeholder="ابحث في المقالات..." class="w-full bg-transparent text-sm text-slate-800 outline-none placeholder:text-slate-400 dark:text-white" /></label></section>
+      <section v-if="featuredPost" class="mb-16"><article @click="openPost(featuredPost)" class="featured-post group relative grid min-h-[470px] cursor-pointer overflow-hidden rounded-[2rem] bg-slate-950 lg:grid-cols-2"><img :src="featuredPost.image" :alt="featuredPost.title" fetchpriority="high" decoding="async" class="absolute inset-0 h-full w-full object-cover opacity-50 transition duration-700 group-hover:scale-105 lg:relative lg:order-2 lg:opacity-80" /><div class="relative z-10 flex flex-col justify-end p-8 text-white md:p-14"><span class="mb-5 w-fit rounded-full bg-[#ff2d20] px-4 py-2 text-xs font-black">مقال مميز · {{ featuredPost.category }}</span><h2 class="max-w-xl text-3xl font-black leading-tight md:text-5xl">{{ featuredPost.title }}</h2><p class="mt-5 max-w-xl leading-8 text-slate-300">{{ featuredPost.excerpt }}</p><div class="mt-8 flex items-center gap-5 text-sm font-bold text-slate-300"><span class="flex items-center gap-2"><ClockIcon class="h-5 w-5 text-[#ff6b63]" />{{ featuredPost.readTime }}</span><span class="flex items-center gap-2"><CalendarIcon class="h-5 w-5 text-[#ff6b63]" />{{ featuredPost.date }}</span></div></div></article></section>
+      <section v-if="regularPosts.length" class="grid gap-6 md:grid-cols-2 lg:grid-cols-4"><article v-for="post in regularPosts" :key="post.id" @click="openPost(post)" class="post-card group cursor-pointer overflow-hidden rounded-3xl border border-slate-200 bg-white dark:border-white/10 dark:bg-slate-900/70"><div class="relative h-48 overflow-hidden"><img :src="post.image" :alt="post.title" loading="lazy" decoding="async" class="h-full w-full object-cover transition duration-700 group-hover:scale-110" /><span class="absolute right-4 top-4 rounded-lg bg-white/90 px-3 py-1.5 text-xs font-black text-[#d9271c] dark:bg-slate-950/85 dark:text-[#ff6b63]">{{ post.category }}</span></div><div class="p-6"><div class="mb-4 flex items-center justify-between text-xs font-bold text-slate-400"><span>{{ post.date }}</span><span>{{ post.readTime }}</span></div><h3 class="text-xl font-black leading-8 text-slate-900 transition group-hover:text-[#ff2d20] dark:text-white">{{ post.title }}</h3><p class="mt-3 line-clamp-2 text-sm leading-7 text-slate-500 dark:text-slate-400">{{ post.excerpt }}</p><div class="mt-6 flex items-center gap-2 text-sm font-black text-[#ff2d20]">اقرأ المقال <ArrowLeftIcon class="h-4 w-4 transition group-hover:-translate-x-1" /></div></div></article></section><div v-else class="rounded-3xl border border-dashed border-slate-300 p-16 text-center text-slate-500 dark:border-white/10">لا توجد مقالات تطابق بحثك.</div>
+      <section class="newsletter mt-20 flex flex-col items-start justify-between gap-8 rounded-[2rem] p-8 text-white md:p-12 lg:flex-row lg:items-center"><div><p class="mb-3 text-sm font-bold text-[#ff9a92]">نشرة المطوّر</p><h2 class="text-3xl font-black md:text-4xl">خلك قريب من جديد البرمجة</h2><p class="mt-3 text-slate-300">ملخصات عملية وأفكار مفيدة تصلك بدون إزعاج.</p></div><div class="flex w-full max-w-md gap-3"><input type="email" placeholder="بريدك الإلكتروني" class="min-w-0 flex-1 rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-white outline-none placeholder:text-slate-400 focus:border-[#ff6b63]" /><button class="rounded-xl bg-[#ff2d20] px-5 py-3 font-black transition hover:bg-[#e0261b]">اشترك</button></div></section>
     </div>
-
-    <!-- Article Detail Modal -->
-    <Transition name="modal">
-      <div v-if="selectedPost" class="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8" dir="rtl">
-        <div class="absolute inset-0 bg-slate-950/90 backdrop-blur-xl" @click="closePost"></div>
-        
-        <div class="relative w-full max-w-5xl max-h-[95vh] glass-card rounded-[4rem] overflow-hidden flex flex-col shadow-[0_50px_100px_-20px_rgba(37,99,235,0.3)] border border-white/40 dark:border-white/10">
-          <button 
-            @click="closePost"
-            class="absolute top-8 left-8 z-30 w-14 h-14 bg-white/40 dark:bg-slate-900/50 hover:bg-red-500 hover:text-white dark:text-white rounded-full flex items-center justify-center transition-all duration-300 shadow-2xl backdrop-blur-xl border border-white/40 dark:border-white/10"
-          >
-            <XMarkIcon class="w-8 h-8" />
-          </button>
-
-          <div class="overflow-y-auto custom-scrollbar relative">
-             <!-- Modal Ambient Glow -->
-             <div class="absolute -top-40 -right-40 w-96 h-96 bg-primary-600/30 blur-[120px] rounded-full pointer-events-none"></div>
-
-            <div class="aspect-[21/9] md:aspect-[21/10] relative">
-              <img :src="selectedPost.image" :alt="selectedPost.title" class="w-full h-full object-cover">
-              <div class="absolute inset-0 bg-gradient-to-t from-white/90 dark:from-slate-900/90 via-transparent to-transparent"></div>
-            </div>
-
-            <div class="px-8 md:px-16 py-12 pb-24 mx-4 md:mx-12 -mt-24 mb-12 relative z-10 glass-card bg-white/60 dark:bg-slate-900/70 border border-white/50 dark:border-white/10 rounded-[3.5rem] shadow-2xl shadow-primary-900/5 backdrop-blur-3xl">
-              <div class="flex flex-wrap items-center gap-4 mb-10">
-                <span class="bg-primary-600 text-white px-8 py-3 rounded-2xl text-sm font-black shadow-2xl shadow-primary-600/30">
-                  {{ selectedPost.category }}
-                </span>
-                <span class="bg-slate-100 dark:bg-slate-800 text-slate-500 px-6 py-3 rounded-2xl text-sm font-black">
-                  إصدار 2025
-                </span>
-              </div>
-
-              <h2 class="text-4xl md:text-7xl font-black mb-10 leading-[1.1] text-slate-900 dark:text-white">
-                {{ selectedPost.title }}
-              </h2>
-
-              <div class="flex flex-wrap items-center gap-10 text-base font-black text-slate-500 mb-16 border-b border-slate-100 dark:border-white/5 pb-10">
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center text-primary-600">
-                    <CalendarIcon class="w-6 h-6" />
-                  </div>
-                  <span>نُشر في: {{ selectedPost.date }}</span>
-                </div>
-                <div class="flex items-center gap-3 text-primary-600">
-                  <div class="w-10 h-10 bg-primary-600 text-white rounded-full flex items-center justify-center">
-                    <ClockIcon class="w-6 h-6" />
-                  </div>
-                  <span>{{ selectedPost.readTime }} للمطالعة</span>
-                </div>
-              </div>
-
-              <div 
-                class="prose prose-2xl dark:prose-invert max-w-none text-slate-600 dark:text-slate-400 leading-relaxed font-medium mb-20"
-                v-html="selectedPost.description"
-              ></div>
-
-              <!-- Author Footer -->
-              <div class="p-10 md:p-14 bg-slate-50 dark:bg-white/5 rounded-[3rem] flex flex-col md:flex-row justify-between items-center gap-10">
-                 <div class="flex items-center gap-8 text-right">
-                    <div class="w-24 h-24 bg-gradient-to-tr from-primary-600 to-indigo-600 rounded-full flex items-center justify-center text-white text-3xl font-black shadow-2xl shadow-primary-600/30">MT</div>
-                    <div>
-                       <p class="text-2xl font-black text-slate-900 dark:text-white mb-2">بواسطة المطور المحترف</p>
-                       <p class="text-slate-500 font-bold">مهندس برمجيات أول وكاتب تقني متخصص في الأنظمة الحديثة.</p>
-                    </div>
-                 </div>
-                 <div class="flex gap-4">
-                    <button class="bg-primary-600 text-white px-10 py-5 rounded-2xl font-black hover:bg-primary-700 transition-all shadow-xl shadow-primary-600/20">متابعة الكاتب</button>
-                    <button class="bg-white dark:bg-slate-800 px-8 py-5 rounded-2xl font-black border border-slate-100 dark:border-white/5 hover:bg-slate-100 transition-all">مشاركة</button>
-                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Transition>
-  </div>
+    <Transition name="modal"><div v-if="selectedPost" class="fixed inset-0 z-[100] flex items-center justify-center p-4"><div class="absolute inset-0 bg-slate-950/80 backdrop-blur-md" @click="closePost"></div><article class="relative max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-3xl bg-white shadow-2xl dark:bg-slate-900" dir="rtl"><button @click="closePost" aria-label="إغلاق المقال" class="absolute left-5 top-5 z-10 rounded-full bg-black/40 p-3 text-white backdrop-blur transition hover:bg-[#ff2d20]"><XMarkIcon class="h-6 w-6" /></button><img :src="selectedPost.image" :alt="selectedPost.title" class="h-56 w-full object-cover md:h-72" /><div class="p-7 md:p-12"><span class="rounded-lg bg-[#ff2d20]/10 px-3 py-2 text-sm font-black text-[#d9271c] dark:text-[#ff6b63]">{{ selectedPost.category }}</span><h2 class="mt-6 text-3xl font-black leading-tight text-slate-950 dark:text-white md:text-5xl">{{ selectedPost.title }}</h2><div class="mt-5 flex gap-5 text-sm font-bold text-slate-400"><span>{{ selectedPost.date }}</span><span>{{ selectedPost.readTime }} قراءة</span></div><div class="blog-content mt-10 text-lg leading-9 text-slate-600 dark:text-slate-300" v-html="selectedPost.description"></div><div class="mt-10 flex items-center justify-between border-t border-slate-200 pt-6 dark:border-white/10"><span class="flex items-center gap-2 font-bold text-slate-500"><CheckCircleIcon class="h-5 w-5 text-[#ff2d20]" /> محتوى عملي للمطورين</span><div class="flex gap-2"><button aria-label="حفظ المقال" class="rounded-xl bg-slate-100 p-3 dark:bg-white/10"><BookmarkIcon class="h-5 w-5" /></button><button aria-label="مشاركة المقال" class="rounded-xl bg-slate-100 p-3 dark:bg-white/10"><ShareIcon class="h-5 w-5" /></button></div></div></div></article></div></Transition>
+  </main>
 </template>
 
 <style scoped>
-.glass {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(25px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.dark .glass {
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.glass-card {
-  background: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
-}
-
-.dark .glass-card {
-  background: rgba(15, 23, 42, 0.45);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-}
-
-.custom-scrollbar::-webkit-scrollbar { width: 8px; }
-.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-.custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
-.dark .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); }
-
-/* Elite Animations */
-.modal-enter-active,
-.modal-leave-active {
-  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.modal-enter-from { opacity: 0; transform: translateY(100px) scale(0.95); }
-.modal-leave-to { opacity: 0; transform: translateY(100px) scale(0.95); }
-
-@keyframes pulse-slow {
-  0%, 100% { opacity: 0.2; transform: scale(1) translate(0, 0); }
-  50% { opacity: 0.4; transform: scale(1.1) translate(40px, -20px); }
-}
-
-@keyframes pulse-slow-reverse {
-  0%, 100% { opacity: 0.1; transform: scale(1) translate(0, 0); }
-  50% { opacity: 0.3; transform: scale(1.1) translate(-40px, 40px); }
-}
-
-.animate-pulse-slow { animation: pulse-slow 15s ease-in-out infinite; }
-.animate-pulse-slow-reverse { animation: pulse-slow-reverse 18s ease-in-out infinite; }
-
-.line-clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;  
-  overflow: hidden;
-}
-
-:deep(.prose h3) {
-  margin-top: 2rem;
-  margin-bottom: 1.5rem;
-  font-weight: 900;
-}
+.blog-page { background: #fffaf9; } .dark .blog-page { background: #100807; }
+.blog-orb { position: absolute; border-radius: 999px; filter: blur(90px); pointer-events: none; opacity: .18; } .blog-orb-one { width: 360px; height: 360px; right: -160px; top: 90px; background: #ff2d20; } .blog-orb-two { width: 280px; height: 280px; left: -140px; top: 550px; background: #fb7185; }
+.blog-hero, .post-card, .featured-post, .newsletter { animation: rise .7s ease both; } .stats-card, .search-box { border: 1px solid rgba(148, 163, 184, .22); background: rgba(255,255,255,.65); } .dark .stats-card, .dark .search-box { background: rgba(30, 18, 17, .7); }
+.category-pill { border: 1px solid transparent; border-radius: 999px; padding: .65rem 1rem; font-size: .82rem; font-weight: 800; color: #64748b; transition: .2s; } .category-pill:hover, .category-pill.active { color: #fff; background: #ff2d20; box-shadow: 0 8px 20px rgba(255,45,32,.2); }
+.featured-post { box-shadow: 0 25px 70px rgba(65, 15, 10, .16); } .featured-post:after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(15, 23, 42, .98), rgba(15, 23, 42, .42) 70%, transparent); } [dir="rtl"] .featured-post:after { background: linear-gradient(270deg, rgba(15, 23, 42, .98), rgba(15, 23, 42, .42) 70%, transparent); }
+.post-card { transition: transform .3s, box-shadow .3s, border-color .3s; } .post-card:hover { transform: translateY(-7px); border-color: rgba(255,45,32,.35); box-shadow: 0 20px 45px rgba(65, 15, 10, .1); } .newsletter { background: #17100f; } .laravel-mark { display: grid; place-items: center; width: 1.4rem; height: 1.4rem; border-radius: 5px; background: #ff2d20; color: #fff; font-size: 1.3rem; line-height: 1; }
+.blog-content :deep(h3) { margin: 2rem 0 .8rem; color: #0f172a; font-size: 1.5rem; font-weight: 900; } .dark .blog-content :deep(h3) { color: #fff; } .blog-content :deep(p) { margin-bottom: 1.3rem; } .blog-code { direction: ltr; margin: 1.5rem 0; border-radius: 1rem; background: #17100f; padding: 1.2rem; color: #ff9a92; font-family: monospace; font-size: .95rem; line-height: 2; text-align: left; overflow-x: auto; } .blog-callout { margin: 1.5rem 0; border-right: 4px solid #ff2d20; border-radius: .75rem; background: #fff1f0; padding: 1rem 1.2rem; font-weight: 700; color: #9f2119; } .dark .blog-callout { background: rgba(255,45,32,.1); color: #ffb0aa; }
+.modal-enter-active, .modal-leave-active { transition: opacity .25s ease; } .modal-enter-from, .modal-leave-to { opacity: 0; } @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } } @media (max-width: 640px) { .featured-post:after, [dir="rtl"] .featured-post:after { background: linear-gradient(0deg, rgba(15,23,42,.98), rgba(15,23,42,.35)); } }
 </style>

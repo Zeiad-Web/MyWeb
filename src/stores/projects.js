@@ -47,7 +47,7 @@ export const useProjectsStore = defineStore('projects', {
                 title: 'موقع البيت العربي للمطابخ',
                 category: 'Frontend',
                 client: 'البيت العربي لتفصيل المطابخ – مؤسسة رائدة في سوق الرياض',
-                websiteUrl: 'https://riyadh-kitchens.vercel.app/',
+                websiteUrl: 'https://ariyd.com/',
                 videoUrl: '/images/project/project1.png',
                 languages: ['Nuxt 3', 'Vue 3', 'TailwindCSS'],
                 description: 'موقع إلكتروني تعريفي وتفاعلي متكامل مخصص لعرض خدمات تصميم وتفصيل وتنفيذ المطابخ في مدينة الرياض (مودرن، كلاسيك، ألمنيوم، خشب، رخام وغيرها).',

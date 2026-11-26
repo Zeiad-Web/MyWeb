@@ -97,14 +97,14 @@ onMounted(() => {
     <div class="max-w-6xl mx-auto space-y-32 relative">
       <!-- Hero Section -->
       <section class="text-center space-y-8 reveal py-12" dir="rtl">
-        <div class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-primary-500/10 text-primary-600 dark:text-primary-400 font-black text-sm mb-4 border border-primary-500/20 shadow-lg shadow-primary-500/5">
+        <div class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-primary-500/10 text-primary-600 font-black text-sm mb-4 border border-primary-500/20 shadow-lg shadow-primary-500/5">
            <SparklesIcon class="w-5 h-5 animate-pulse" />
            <span>اصمم المستقبل بلمسة إبداع</span>
         </div>
-        <h1 class="text-4xl md:text-7xl font-black text-slate-900 dark:text-white leading-tight">
+        <h1 class="text-4xl md:text-7xl font-black text-slate-900 leading-tight">
           احول رؤيتك إلى <span class="bg-gradient-to-l from-primary-600 to-cyan-500 bg-clip-text text-transparent">واقع رقمي</span> مبهر.
         </h1>
-        <p class="text-slate-500 dark:text-slate-400 max-w-3xl mx-auto text-xl leading-relaxed">
+        <p class="text-slate-500 max-w-3xl mx-auto text-xl leading-relaxed">
           أقدم حلولاً تقنية متكاملة تتجاوز حدود التوقعات، تجمع بين هندسة الكود المتينة وجمال التصميم الأخّاذ لضمان تجربة مستخدم لا تُنسى.
         </p>
       </section>
@@ -121,22 +121,22 @@ onMounted(() => {
           <!-- Animated Border Glow (Heavenly Style) -->
           <div class="absolute inset-0 bg-gradient-to-br from-primary-500 via-cyan-400 to-indigo-600 opacity-20 group-hover:opacity-100 transition-opacity duration-700"></div>
           
-          <div class="relative h-full bg-white dark:bg-slate-900 rounded-[2.4rem] p-8 lg:p-10 flex flex-col transition-colors duration-500 group-hover:bg-white/90 dark:group-hover:bg-slate-900/90">
+          <div class="relative h-full bg-white rounded-[2.4rem] p-8 lg:p-10 flex flex-col transition-colors duration-500 group-hover:bg-white/90">
             <!-- Icon Container -->
-            <div class="w-16 h-16 bg-gradient-to-br from-primary-50 to-primary-100 dark:from-slate-800 dark:to-slate-900 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
-              <component :is="service.icon" class="w-8 h-8 text-primary-600 dark:text-primary-400" />
+            <div class="w-16 h-16 bg-gradient-to-br from-primary-50 to-primary-100 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+              <component :is="service.icon" class="w-8 h-8 text-primary-600" />
             </div>
 
-            <h3 class="text-2xl lg:text-3xl font-black mb-4 text-slate-900 dark:text-white group-hover:text-primary-600 transition-colors">
+            <h3 class="text-2xl lg:text-3xl font-black mb-4 text-slate-900 group-hover:text-primary-600 transition-colors">
               {{ service.title }}
             </h3>
-            <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed mb-8 flex-grow">
+            <p class="text-slate-600 text-lg leading-relaxed mb-8 flex-grow">
               {{ service.text }}
             </p>
 
             <!-- Feature List -->
-            <div class="space-y-4 pt-6 border-t border-slate-100 dark:border-slate-800">
-               <div v-for="feature in service.features" :key="feature" class="flex items-center gap-3 text-sm font-bold text-slate-500 dark:text-slate-400">
+            <div class="space-y-4 pt-6 border-t border-slate-100">
+               <div v-for="feature in service.features" :key="feature" class="flex items-center gap-3 text-sm font-bold text-slate-500">
                  <div class="w-1.5 h-1.5 rounded-full bg-primary-500 shadow-lg shadow-primary-500/50"></div>
                  {{ feature }}
                </div>
@@ -161,36 +161,36 @@ onMounted(() => {
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-4">
            <div v-for="(step, index) in workflowSteps" :key="step.title" class="relative group text-center">
              <!-- Connector Line (Desktop) -->
-             <div v-if="index < 3" class="hidden md:block absolute top-1/2 left-[-15%] w-1/4 h-0.5 bg-gradient-to-r from-transparent via-slate-200 dark:via-slate-800 to-transparent -z-10"></div>
+             <div v-if="index < 3" class="hidden md:block absolute top-1/2 left-[-15%] w-1/4 h-0.5 bg-gradient-to-r from-transparent via-slate-200 to-transparent -z-10"></div>
              
-             <div class="w-20 h-20 mx-auto bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-full flex items-center justify-center mb-6 group-hover:border-primary-500 transition-colors duration-500 relative">
+             <div class="w-20 h-20 mx-auto bg-white border-2 border-slate-100 rounded-full flex items-center justify-center mb-6 group-hover:border-primary-500 transition-colors duration-500 relative">
                 <div class="absolute inset-0 bg-primary-500/10 rounded-full scale-0 group-hover:scale-125 transition-transform duration-500 blur-xl"></div>
-                <component :is="step.icon" class="w-10 h-10 text-slate-800 dark:text-white" />
-                <div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-white dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 flex items-center justify-center font-black text-xs">
+                <component :is="step.icon" class="w-10 h-10 text-slate-800" />
+                <div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-white border-2 border-slate-100 flex items-center justify-center font-black text-xs">
                   {{ index + 1 }}
                 </div>
              </div>
-             <h4 class="text-xl font-black text-slate-900 dark:text-white">{{ step.title }}</h4>
+             <h4 class="text-xl font-black text-slate-900">{{ step.title }}</h4>
            </div>
         </div>
       </section>
 
       <!-- CTA (Call to Action) -->
       <section class="reveal px-4">
-        <div class="relative overflow-hidden rounded-[3rem] p-12 lg:p-20 text-center space-y-8 bg-slate-900 dark:bg-white text-white dark:text-slate-900">
+        <div class="relative overflow-hidden rounded-[3rem] p-12 lg:p-20 text-center space-y-8 bg-slate-900 text-white">
            <!-- Decor -->
            <div class="absolute top-0 right-0 w-64 h-64 bg-primary-600/20 blur-[100px] rounded-full"></div>
            <div class="absolute bottom-0 left-0 w-64 h-64 bg-cyan-600/20 blur-[100px] rounded-full"></div>
 
            <h2 class="text-3xl md:text-5xl font-black relative z-10">هل أنت مستعد لبدء مشروعك القادم؟</h2>
-           <p class="text-slate-400 dark:text-slate-500 max-w-2xl mx-auto text-xl relative z-10">دعنا نتحدث عن رؤيتك وكيف يمكننا مساعدتك في تحقيقها بأفضل جودة تقنية ممكنة.</p>
+           <p class="text-slate-400 max-w-2xl mx-auto text-xl relative z-10">دعنا نتحدث عن رؤيتك وكيف يمكننا مساعدتك في تحقيقها بأفضل جودة تقنية ممكنة.</p>
            
            <div class="flex flex-wrap justify-center gap-6 pt-8 relative z-10">
               <router-link to="/contact" class="flex items-center gap-3 bg-primary-600 text-white px-10 py-5 rounded-3xl font-black hover:scale-105 transition-all shadow-2xl hover:shadow-primary-600/40">
                 <ChatBubbleBottomCenterTextIcon class="w-6 h-6" />
                 <span>احجز استشارتك المجانية</span>
               </router-link>
-              <router-link to="/projects" class="flex items-center gap-3 border-2 border-white/20 dark:border-slate-900/10 px-10 py-5 rounded-3xl font-black hover:bg-white/10 dark:hover:bg-slate-900/5 transition-all">
+              <router-link to="/projects" class="flex items-center gap-3 border-2 border-white/20 px-10 py-5 rounded-3xl font-black hover:bg-white/10 transition-all">
                 <span>رؤية أعمالي</span>
                 <ArrowRightIcon class="w-6 h-6 rotate-180" />
               </router-link>
@@ -227,11 +227,6 @@ onMounted(() => {
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.dark .glass {
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
 .mobile-active {
   transform: translateY(-12px);
 }
@@ -244,11 +239,6 @@ onMounted(() => {
 .group:hover h3, 
 .mobile-active h3 {
   color: theme('colors.primary.600');
-}
-
-.dark .group:hover h3, 
-.dark .mobile-active h3 {
-  color: theme('colors.primary.400');
 }
 
 

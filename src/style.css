@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Keep legacy dark: utilities inactive; this project uses light mode only. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --primary-glow: conic-gradient(from 180deg at 50% 50%, #164e63 0deg, #0e7490 55deg, #0891b2 120deg, #06b6d4 160deg, transparent 360deg);
   --secondary-glow: radial-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
@@ -19,14 +22,14 @@
 }
 
 body {
-  @apply bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-500;
+  @apply bg-slate-50 text-slate-900;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
 }
 
 /* Custom Glassmorphism */
 .glass {
-  @apply bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-xl;
+  @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-xl;
 }
 
 /* Animations */
@@ -77,29 +80,6 @@ body {
 .reveal.active {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* View Transitions for Dark Mode */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-
-::view-transition-old(root) {
-  z-index: 1;
-}
-
-::view-transition-new(root) {
-  z-index: 9999;
-}
-
-.dark::view-transition-old(root) {
-  z-index: 9999;
-}
-
-.dark::view-transition-new(root) {
-  z-index: 1;
 }
 
 /* Utilities */

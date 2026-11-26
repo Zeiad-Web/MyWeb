@@ -96,6 +96,8 @@ const languagesData = [
             <img 
               :src="ziadImage" 
               alt="Ziad Al-Oraiqi Professional Profile" 
+              loading="lazy"
+              decoding="async"
               class="rounded-2xl hover:scale-105 transition-all duration-700 w-full h-[500px] object-cover"
             >
             <div class="absolute bottom-6 left-6 right-6 p-4 glass rounded-xl" dir="ltr">

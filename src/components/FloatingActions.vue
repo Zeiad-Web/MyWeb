@@ -71,11 +71,6 @@ const actions = [
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.dark .glass {
-  background: rgba(15, 23, 42, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
 @keyframes float-sidebar {
   0%, 100% { transform: translateY(calc(-50% - 10px)); }
   50% { transform: translateY(calc(-50% + 10px)); }

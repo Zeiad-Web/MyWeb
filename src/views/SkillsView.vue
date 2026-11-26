@@ -52,7 +52,7 @@ const skillCategories = [
     <div class="max-w-6xl mx-auto space-y-16">
       <header class="text-center space-y-4 reveal" dir="rtl">
         <h2 class="text-primary-600 font-black tracking-widest uppercase text-sm">مجموعة الأدوات التقنية</h2>
-        <h1 class="text-4xl md:text-6xl font-black tracking-tight text-slate-900 dark:text-white">
+        <h1 class="text-4xl md:text-6xl font-black tracking-tight text-slate-900">
           مهاراتي <span class="text-primary-600">والخبرات</span> التقنية
         </h1>
         <p class="text-slate-500 max-w-2xl mx-auto text-lg leading-relaxed">
@@ -64,7 +64,7 @@ const skillCategories = [
         <div 
           v-for="category in skillCategories" 
           :key="category.name" 
-          class="glass p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 hover:shadow-2xl transition-all duration-500"
+          class="glass p-10 rounded-[2.5rem] border border-slate-100 hover:shadow-2xl transition-all duration-500"
         >
           <div class="flex items-center gap-4 mb-10">
             <div class="w-14 h-14 bg-primary-500/10 rounded-2xl flex items-center justify-center text-primary-600">
@@ -76,10 +76,10 @@ const skillCategories = [
           <div class="space-y-8">
             <div v-for="skill in category.skills" :key="skill.name">
               <div class="flex justify-between items-center mb-3">
-                <span class="font-bold text-slate-700 dark:text-slate-300">{{ skill.name }}</span>
+                <span class="font-bold text-slate-700">{{ skill.name }}</span>
                 <span class="text-sm font-black text-primary-600">{{ skill.level }}%</span>
               </div>
-              <div class="h-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+              <div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
                 <div 
                   class="h-full bg-primary-600 rounded-full transition-all duration-1000 ease-out"
                   :style="{ width: skill.level + '%' }"
@@ -90,13 +90,13 @@ const skillCategories = [
         </div>
 
         <!-- Tech Stack Badge Cloud (Example of another style) -->
-        <div class="glass p-10 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 flex flex-col justify-center items-center text-center space-y-8">
+        <div class="glass p-10 rounded-[2.5rem] border border-slate-100 flex flex-col justify-center items-center text-center space-y-8">
           <div class="w-20 h-20 bg-cyan-500/10 rounded-3xl flex items-center justify-center text-cyan-600">
             <CommandLineIcon class="w-10 h-10" />
           </div>
           <h3 class="text-2xl font-black">تقنيات أخرى أتقنها</h3>
           <div class="flex flex-wrap justify-center gap-3">
-            <span v-for="tag in ['Electron', 'WebSockets', 'GraphQL', 'Vite', 'Pinia', 'Canva', 'Sass','Build Videos,Images']" :key="tag" class="px-5 py-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-sm font-bold text-slate-600 dark:text-slate-300 hover:bg-primary-600 hover:text-white transition-colors cursor-default">
+            <span v-for="tag in ['Electron', 'WebSockets', 'GraphQL', 'Vite', 'Pinia', 'Canva', 'Sass','Build Videos,Images']" :key="tag" class="px-5 py-2.5 bg-slate-100 rounded-full text-sm font-bold text-slate-600 hover:bg-primary-600 hover:text-white transition-colors cursor-default">
               {{ tag }}
             </span>
           </div>
@@ -113,8 +113,4 @@ const skillCategories = [
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.dark .glass {
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
 </style>

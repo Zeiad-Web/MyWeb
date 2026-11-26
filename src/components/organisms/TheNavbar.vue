@@ -3,7 +3,6 @@ import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import { Dialog, DialogPanel } from '@headlessui/vue'
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
-import ThemeToggle from '../ThemeToggle.vue' // Keeping these here for now, or move to molecules
 import LangToggle from '../LangToggle.vue'
 import { useLanguageStore } from '@/stores/language'
 import BaseButton from '../atoms/BaseButton.vue'
@@ -22,10 +21,10 @@ const navigation = [
 </script>
 
 <template>
-  <header class="fixed inset-x-0 top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
+  <header class="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
     <nav class="flex items-center justify-between p-6 lg:px-8 max-w-7xl mx-auto" aria-label="Global">
       <div class="flex lg:flex-1">
-        <RouterLink to="/" class="-m-1.5 p-1.5 font-bold text-2xl text-primary-600 dark:text-primary-400 font-mono tracking-tighter">
+          <RouterLink to="/" class="-m-1.5 p-1.5 font-bold text-2xl text-primary-600 font-mono tracking-tighter">
           &lt;M /&gt;
         </RouterLink>
       </div>
@@ -49,7 +48,6 @@ const navigation = [
       </div>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4 items-center">
         <LangToggle />
-        <ThemeToggle />
       </div>
     </nav>
     <Dialog as="div" class="lg:hidden" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
@@ -80,7 +78,6 @@ const navigation = [
             </div>
             <div class="py-6 flex gap-4 justify-center">
               <LangToggle />
-              <ThemeToggle />
             </div>
           </div>
         </div>
