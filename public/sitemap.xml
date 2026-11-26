@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://www.ziadweb.com/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
+  <url><loc>https://ziadweb.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://ziadweb.com/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ziadweb.com/skills</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ziadweb.com/projects</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://ziadweb.com/services</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ziadweb.com/blog</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ziadweb.com/contact</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ziadweb.com/projects/abo-hussein-kitchens</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ziadweb.com/projects/noor-quran</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ziadweb.com/projects/arab-house-kitchens</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ziadweb.com/projects/amaken</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ziadweb.com/projects/yemen-jobs</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ziadweb.com/projects/hr-system</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ziadweb.com/projects/e-commerce</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ziadweb.com/projects/school-system</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://ziadweb.com/projects/pos-system</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

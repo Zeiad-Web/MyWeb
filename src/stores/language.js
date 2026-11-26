@@ -20,6 +20,7 @@ export const useLanguageStore = defineStore('language', () => {
         document.documentElement.lang = val
         direction.value = val === 'ar' ? 'rtl' : 'ltr'
         document.documentElement.dir = direction.value
+        window.dispatchEvent(new CustomEvent('language-changed', { detail: val }))
     }, { immediate: true })
 
     return { locale, direction, setLanguage, toggleLanguage }

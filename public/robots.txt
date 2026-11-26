@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.ziadweb.com/sitemap.xml
+Sitemap: https://ziadweb.com/sitemap.xml
